@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+  		src="https://code.jquery.com/jquery-3.6.4.js"
+  		integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+  		crossorigin="anonymous"></script>
+    <title>Document</title>
+    <script src="join-us.js"></script>
+</head>
+<body>
+    <form id="register-form">
+        <a href="sign-in.html">Mam już konto</a>
+        <!-- TODO: Może tutaj zrobisz cos takiego jak w tym linku https://codepen.io/Metty/pen/MWjOavR chodzi o to ze zamiast takich kuleczek to przyciski duże -->
+        <div>
+            Jestem 
+            <label>
+                pracownikiem
+                <input type="radio" name="type" value="employee" >
+            </label>
+            <label>
+                pracodawcą
+                <input type="radio" name="type" value="employer" >
+            </label>
+        </div>
+        <input type="text" name="name"  placeholder="nazwa użytkownika" required>
+        <input type="email" name="email"  placeholder="adres e-mail" required>
+        <input type="password" name="password"  placeholder="hasło" required>
+        <input type="password" name="repeat-password"  placeholder="powtórz hasło" required>
+        <div id="password-tips">
+            Hasło powinno składać się z:
+            <ul>
+                <li>od 8 do 20 znaków</li>
+                <li>co najmniej jedna duża litera</li>
+                <li>co najmniej jedna cyfra</li>
+                <li>co najmniej jeden znak specjalny (!?#$^&*_-)</li>
+            </ul>
+        </div>
+        <div id="error-message"></div>
+        <input type="submit" value="Zarejestruj się!">
+    </form>
+</body>
+</html>

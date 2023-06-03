@@ -1,6 +1,6 @@
 <?php
 // TODO: add checking if user is logged.
-require('start.php');
+require('start.html');
 
 // header("Location:welcome.php");
 
