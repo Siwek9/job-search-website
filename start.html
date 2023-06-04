@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/styles/start_page.css">
     <script
   		src="https://code.jquery.com/jquery-3.6.4.js"
   		integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
@@ -11,9 +16,56 @@
     <title>Document</title>
 </head>
 <body>
-    Tutaj jest start page beda jakies ladne rzeczy o naszej stronie. bedzie tez przycisk do logowania.
-
-    <a href="join-us.html"><button id="join-us-button">Zacznij poszukiwania pracy teraz!</button></a>
+    <nav>
+        <div id="logo">JobSE <span>Job finding made easy</span></div> <!-- Tu trzeba nazwę wymyślić. Mój pomysł JobSE (Job search) prosto i przyjemnie -->
+        <div id="links">
+            <a href="#main">O nas</a>
+            <a href="#employees">Dla Pracowników</a>
+            <a href="#employers">Dla Pracodawców</a>
+            <a href="sign-in.html">Zaloguj się</a>
+        </div>
+    </nav>
+    <div id="main">
+        <div id="left">
+            <h1>Poszukiwanie pracy</h1>
+            <h2>nigdy nie było takie <span>proste</span></h2>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum error soluta quibusdam veritatis suscipit, iure totam repellendus placeat unde fuga nam voluptatem velit dolores a, omnis sint ipsam corporis autem!
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus dolor laudantium eum. Praesentium placeat, ea harum odit vero cumque reprehenderit animi rem, dolor voluptates inventore perspiciatis suscipit iusto, laboriosam aliquam.
+            <a href="join-us.html" id="join-us-button">Dołącz do nas już dziś!</a>
+        </div>
+        <div id="right">
+            <img src="assets/images/main.png" alt="">
+        </div>
+    </div>
+    <div id="employees">
+        <h1>Dlaczego nasza platforma jest idealna do poszukiwania pracy?</h1>
+        <div id="cards">
+            <div class="card">
+                <i class="fa-regular fa-id-card fa-2xl" style="color: #719472"></i> Łatwe dodanie CV  <br><br>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, eum a. Neque asperiores beatae repellat, numquam dignissimos inventore placeat expedita possimus quae, odio animi. Aliquam labore voluptatibus inventore atque corrupti. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet, suscipit repudiandae? Consequuntur consectetur quod harum accusantium dolore ea est, nostrum quam sapiente exercitationem repellat dignissimos, quae odio velit quos similique.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-briefcase fa-2xl" style="color: #719472"></i> Wygodne sprawdzanie ofert <br><br>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, eum a. Neque asperiores beatae repellat, numquam dignissimos inventore placeat expedita possimus quae, odio animi. Aliquam labore voluptatibus inventore atque corrupti. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet, suscipit repudiandae? Consequuntur consectetur quod harum accusantium dolore ea est, nostrum quam sapiente exercitationem repellat dignissimos, quae odio velit quos similique.</p>
+            </div>
+            <div class="card">
+                <i class="fa-regular fa-paper-plane fa-2xl" style="color: #719472"></i> Wysyłanie cv w aplikacji <br><br>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, eum a. Neque asperiores beatae repellat, numquam dignissimos inventore placeat expedita possimus quae, odio animi. Aliquam labore voluptatibus inventore atque corrupti. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet, suscipit repudiandae? Consequuntur consectetur quod harum accusantium dolore ea est, nostrum quam sapiente exercitationem repellat dignissimos, quae odio velit quos similique.</p>
+            </div>
+        </div>
+    </div>
+    <div id="employers">
+        <h1>Jak JobSE pomoże w znalezieniu pracowników?</h1><br>
+        <div><span>1.</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem laudantium sed corporis rem veritatis veniam est libero numquam, quasi officiis architecto doloribus quibusdam eius. <br><br></div>
+        <div><span>2.</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem laudantium sed corporis rem veritatis veniam est libero numquam, quasi officiis architecto doloribus quibusdam eius. <br><br></div>
+        <div><span>3.</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem laudantium sed corporis rem veritatis veniam est libero numquam, quasi officiis architecto doloribus quibusdam eius. <br><br></div>
+        <div><span>4.</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem laudantium sed corporis rem veritatis veniam est libero numquam, quasi officiis architecto doloribus quibusdam eius. <br><br></div>
+    </div>
+    <div id="joinUs">
+        <h1>Dołącz do nas już <span style="color: #719472; text-transform: uppercase;">dziś</span></h1><br>
+        <a href="join-us.html" id="join-us-button">Dołącz</a>
+    </div>
+    <footer><!-- To jakieś informację --></footer>
 
 </body>
 </html>
