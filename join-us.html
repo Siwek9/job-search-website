@@ -8,11 +8,11 @@
   		src="https://code.jquery.com/jquery-3.6.4.js"
   		integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
   		crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>Dołącz do nas!</title>
     <script src="join-us.js"></script>
 </head>
 <body>
-    <form id="register-form">
+    <form id="register-form" autocomplete="off">
         <a href="sign-in.html">Mam już konto</a>
         <!-- TODO: Może tutaj zrobisz cos takiego jak w tym linku https://codepen.io/Metty/pen/MWjOavR chodzi o to ze zamiast takich kuleczek to przyciski duże -->
         <div>
@@ -26,10 +26,10 @@
                 <input type="radio" name="type" value="employer" >
             </label>
         </div>
-        <input type="text" name="name"  placeholder="nazwa użytkownika" required>
-        <input type="email" name="email"  placeholder="adres e-mail" required>
-        <input type="password" name="password"  placeholder="hasło" required>
-        <input type="password" name="repeat-password"  placeholder="powtórz hasło" required>
+        <input type="text" name="name"  placeholder="nazwa użytkownika">
+        <input type="email" name="email"  placeholder="adres e-mail">
+        <input type="password" name="password"  placeholder="hasło"><label>Pokaż hasło<input type="checkbox" id=""><    /label>
+        <input type="password" name="password-repeat"  placeholder="powtórz hasło">
         <div id="password-tips">
             Hasło powinno składać się z:
             <ul>

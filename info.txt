@@ -1,0 +1,4 @@
+email poczty:
+    no_reply@jobsearch.hub.pl (interia.pl)
+hasło:
+    HardPassword123_
