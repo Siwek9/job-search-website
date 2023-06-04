@@ -208,3 +208,42 @@ footer{
     height: 10rem;
     background: #252525;
 }
+
+@media (max-width: 2100px) {
+	.card{
+        font: 600 20px Poppins;
+        width: 30rem;
+        height: 40rem;
+    }
+
+    .card span{
+        font: 600 12px Poppins;
+    }
+}
+
+@media (max-width: 1600px) {
+	#cards{
+        flex-wrap: wrap;
+    }
+
+    .card{
+        font: 600 20px Poppins;
+        width: 40rem;
+        height: 30rem;
+        margin-bottom: 2rem;
+    }
+
+    .card span{
+        font: 600 12px Poppins;
+    }
+
+    nav{
+        padding: 1rem 1.5rem;
+    }
+
+    nav a{
+        padding: 0.7rem 3rem;
+        font: 14px Poppins;
+        border-radius: 20px;
+    }
+}
