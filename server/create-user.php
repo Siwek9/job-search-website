@@ -90,7 +90,7 @@
     $mail->CharSet="UTF-8";
     $mail->Host = "	poczta.interia.pl"; /* Zależne od hostingu poczty*/
     $mail->SMTPDebug = 1;
-    $mail->Port = 465 ; /* Zależne od hostingu poczty, czasem 587 */
+    $mail->Port = 587 ; /* Zależne od hostingu poczty, czasem 587 */
     $mail->SMTPSecure = 'tls'; /* Jeżeli ma być aktywne szyfrowanie SSL */
     $mail->SMTPAuth = true;
     $mail->IsHTML(true);
