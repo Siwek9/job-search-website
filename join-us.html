@@ -17,41 +17,41 @@
 </head>
 <body>
     <div class="flex">
-    <form id="register-form" autocomplete="off">
-        <a href="sign-in.html">Masz juz konto? Kliknij tutaj</a><br>
-        <!-- TODO: Może tutaj zrobisz cos takiego jak w tym linku https://codepen.io/Metty/pen/MWjOavR chodzi o to ze zamiast takich kuleczek to przyciski duże -->
-        <div>
-            <div style="margin-bottom: 0.7rem"> Jestem </div>
-            <input type="radio" name="type" value="employee" id="left" checked>
-            <label id="leftLbl" for="left">
-                Pracownikiem
-            </label>
-            <input type="radio" name="type" value="employer" id="right">
-            <label id="rightLbl" for="right">
-                Pracodawcą
-            </label>
-        </div>
-        <br>
-        <!-- TODO: może weź pod uwage ze obok tych inputow pojawia sie taki warning ze cos jest nie tak z danymi to pozniej zrobie jeszcze walidacje w JS zeby ładnie było -->
-        <div class="relative"><input type="text" name="name"  placeholder="Nazwa Użytkownika"><i id="userName" class="fa-solid fa-circle-exclamation fa-xl fa-bounce" style="color: rgb(238, 110, 110); position: absolute;"></i></div>
-        <div class="relative"><input type="email" name="email"  placeholder="Adres E-mail"><i id="email" class="fa-solid fa-circle-exclamation fa-xl fa-bounce" style="color: rgb(238, 110, 110); position: absolute;"></i></div>
-        <div class="relative"><input type="password" name="password"  placeholder="Hasło"><i id="passwd" class="fa-solid fa-circle-exclamation fa-xl fa-bounce" style="color: rgb(238, 110, 110); position: absolute;"></i></div>
-        <div class="relative"><input type="password" name="password-repeat"  placeholder="Powtórz Hasło"><i id="passwd1" class="fa-solid fa-circle-exclamation fa-xl fa-bounce" style="color: rgb(238, 110, 110); position: absolute;"></i></div>
-        <div id="password-tips">
-            Hasło powinno składać się z:
-            <ul>
-                <li>od 8 do 20 znaków</li>
-                <li>co najmniej jedna duża litera</li>
-                <li>co najmniej jedna cyfra</li>
-                <li>co najmniej jeden znak specjalny (!?#$^&*_-)</li>
-            </ul>
-        </div>
-        <div class="flex">
-            <div class="g-recaptcha" data-sitekey="6LfxKWgmAAAAAO4QYHTpW8nL94fbRJzGfNtbtC76"></div>
-        </div>
-        <input type="submit" value="Zarejestruj się!">
-        <div id="error-message"></div>
-    </form>
-</div>
+        <form id="register-form" autocomplete="off">
+            <a href="sign-in.html">Masz juz konto? Kliknij tutaj</a><br>
+            <!-- TODO: Może tutaj zrobisz cos takiego jak w tym linku https://codepen.io/Metty/pen/MWjOavR chodzi o to ze zamiast takich kuleczek to przyciski duże -->
+            <div>
+                <div style="margin-bottom: 0.7rem"> Jestem </div>
+                <input type="radio" name="type" value="employee" id="left" checked>
+                <label id="leftLbl" for="left">
+                    Pracownikiem
+                </label>
+                <input type="radio" name="type" value="employer" id="right">
+                <label id="rightLbl" for="right">
+                    Pracodawcą
+                </label>
+            </div>
+            <br>
+            <!-- TODO: może weź pod uwage ze obok tych inputow pojawia sie taki warning ze cos jest nie tak z danymi to pozniej zrobie jeszcze walidacje w JS zeby ładnie było -->
+            <div class="relative"><input type="text" name="name"  placeholder="Nazwa Użytkownika"><i id="userName" class="fa-solid fa-circle-exclamation fa-xl fa-bounce" style="color: rgb(238, 110, 110); position: absolute;"></i></div>
+            <div class="relative"><input type="email" name="email"  placeholder="Adres E-mail"><i id="email" class="fa-solid fa-circle-exclamation fa-xl fa-bounce" style="color: rgb(238, 110, 110); position: absolute;"></i></div>
+            <div class="relative"><input type="password" name="password"  placeholder="Hasło"><i id="passwd" class="fa-solid fa-circle-exclamation fa-xl fa-bounce" style="color: rgb(238, 110, 110); position: absolute;"></i></div>
+            <div class="relative"><input type="password" name="password-repeat"  placeholder="Powtórz Hasło"><i id="passwd1" class="fa-solid fa-circle-exclamation fa-xl fa-bounce" style="color: rgb(238, 110, 110); position: absolute;"></i></div>
+            <div id="password-tips">
+                Hasło powinno składać się z:
+                <ul>
+                    <li>od 8 do 20 znaków</li>
+                    <li>co najmniej jedna duża litera</li>
+                    <li>co najmniej jedna cyfra</li>
+                    <li>co najmniej jeden znak specjalny (!?#$^&*_-)</li>
+                </ul>
+            </div>
+            <div class="flex">
+                <div class="g-recaptcha" data-sitekey="6LfxKWgmAAAAAO4QYHTpW8nL94fbRJzGfNtbtC76"></div>
+            </div>
+            <input type="submit" value="Zarejestruj się!">
+            <div id="error-message"></div>
+        </form>
+    </div>
 </body>
 </html>
