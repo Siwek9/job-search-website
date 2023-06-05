@@ -24,7 +24,7 @@ html {
 }
   
 ::-webkit-scrollbar-thumb:hover {
-    background: #d9e2da;
+    background: #575857;
 }
 
 nav{
@@ -52,7 +52,7 @@ nav a, #joinUs a{
 
 a:hover, #joinUs a:hover{
     color: #f8f8f8;
-    border-radius: 10px;
+    transform: scale(1.1);
 }
 
 .item{

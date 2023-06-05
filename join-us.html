@@ -9,29 +9,33 @@
   		integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
   		crossorigin="anonymous"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/form.css">
     <title>Dołącz do nas!</title>
     <script src="join-us.js"></script>
 </head>
 <body>
+    <div class="flex">
     <form id="register-form" autocomplete="off">
-        <a href="sign-in.html">Mam już konto</a>
+        <a href="sign-in.html">Masz juz konto? Kliknij tutaj</a><br>
         <!-- TODO: Może tutaj zrobisz cos takiego jak w tym linku https://codepen.io/Metty/pen/MWjOavR chodzi o to ze zamiast takich kuleczek to przyciski duże -->
         <div>
-            Jestem 
-            <label>
-                pracownikiem
-                <input type="radio" name="type" value="employee" >
+            <div style="margin-bottom: 0.7rem"> Jestem </div>
+            <input type="radio" name="type" value="employee" id="left" checked>
+            <label id="leftLbl" for="left">
+                Pracownikiem
             </label>
-            <label>
-                pracodawcą
-                <input type="radio" name="type" value="employer" >
+            <input type="radio" name="type" value="employer" id="right">
+            <label id="rightLbl" for="right">
+                Pracodawcą
             </label>
         </div>
+        <br>
         <!-- TODO: może weź pod uwage ze obok tych inputow pojawia sie taki warning ze cos jest nie tak z danymi to pozniej zrobie jeszcze walidacje w JS zeby ładnie było -->
-        <input type="text" name="name"  placeholder="nazwa użytkownika">
-        <input type="email" name="email"  placeholder="adres e-mail">
-        <input type="password" name="password"  placeholder="hasło"><label>Pokaż hasło<input type="checkbox"></label>
-        <input type="password" name="password-repeat"  placeholder="powtórz hasło"><label>Pokaż hasło<input type="checkbox"></label>
+        <input type="text" name="name"  placeholder="Nazwa Użytkownika"><!-- dodac kolko/trojkoat czerwone gdy blad -->
+        <input type="email" name="email"  placeholder="Adres E-mail">
+        <input type="password" name="password"  placeholder="Hasło">
+        <input type="password" name="password-repeat"  placeholder="Powtórz Hasło">
         <div id="password-tips">
             Hasło powinno składać się z:
             <ul>
@@ -41,9 +45,12 @@
                 <li>co najmniej jeden znak specjalny (!?#$^&*_-)</li>
             </ul>
         </div>
-        <div class="g-recaptcha" data-sitekey="6LfxKWgmAAAAAO4QYHTpW8nL94fbRJzGfNtbtC76"></div>
-        <div id="error-message"></div>
+        <div class="flex">
+            <div class="g-recaptcha" data-sitekey="6LfxKWgmAAAAAO4QYHTpW8nL94fbRJzGfNtbtC76"></div>
+        </div>
         <input type="submit" value="Zarejestruj się!">
+        <div id="error-message"></div>
     </form>
+</div>
 </body>
 </html>

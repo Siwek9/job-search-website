@@ -1,0 +1,105 @@
+body{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background: #ebf0eb;
+    font: 16px Poppins;
+}
+
+a, input[type="submit"]{
+    padding: 0.7rem 3rem;
+    text-decoration: none;
+    color: #252525;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    font: 18px Poppins;
+    background: #658667;
+    border-radius: 20px;
+}
+
+input[type="submit"]{
+    margin-top: 2rem;
+    border: 0;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+}
+
+form{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 4rem;
+    padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+input[type="text"], input[type="email"],input[type="password"]{
+    margin: 1rem 0;
+    transition: 0.2s;
+    border-radius: 20px;
+    padding: 0.7rem 1.3rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+input[type="text"]:focus, input[type="email"]:focus,input[type="password"]:focus{
+    outline: 2px solid #7e7c7c;
+    font-size: 16px;
+}
+
+a:hover, input[type="submit"]:hover{
+    color: #f8f8f8;
+    transform: scale(1.1);
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+ul{
+    text-align: left;
+}
+
+label{
+    cursor: pointer;
+}
+
+#leftLbl, #rightLbl{
+    background: #b9ceb9;
+    padding: 0.3rem 1rem; 
+    transition: 0.5s;  
+}
+    
+
+#leftLbl{
+    border-radius: 10px 0 0 10px;
+}
+
+#rightLbl{
+    border-radius: 0 10px 10px 0;
+}
+
+#left:checked + #leftLbl{
+    background: #658667;
+}
+
+#right:checked + #rightLbl{
+    background: #658667;
+}
+
+#error-message{
+    margin-top: 1rem;
+    color: rgb(238, 110, 110);
+}
