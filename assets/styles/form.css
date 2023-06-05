@@ -46,6 +46,7 @@ form{
 
 input[type="text"], input[type="email"],input[type="password"]{
     margin: 1rem 0;
+    width: 70%;
     transition: 0.2s;
     border-radius: 20px;
     padding: 0.7rem 1.3rem;
@@ -102,4 +103,15 @@ label{
 #error-message{
     margin-top: 1rem;
     color: rgb(238, 110, 110);
+}
+
+.relative{
+    width: 100%;
+    position: relative;
+}
+
+.relative i{
+    top: 50%;
+    margin-left: 1rem;
+    display: none; 
 }
