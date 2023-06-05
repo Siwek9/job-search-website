@@ -12,6 +12,7 @@ body{
 }
 
 a, input[type="submit"]{
+    user-select: none;
     padding: 0.7rem 3rem;
     text-decoration: none;
     color: #252525;
