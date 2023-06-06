@@ -5,6 +5,7 @@ body{
     margin: 0;
     background: #ebf0eb;
     scroll-snap-type: x mandatory;
+    overflow-x: hidden;
 }
 
 html {
@@ -28,6 +29,7 @@ html {
 }
 
 nav{
+    user-select: none;
     height: 5rem;
     display: flex;
     justify-content: space-between;
@@ -36,6 +38,7 @@ nav{
 }
 
 nav a, #joinUs a{
+    user-select: none;
     padding: 0.7rem 3rem;
     text-decoration: none;
     color: #252525;
@@ -106,7 +109,7 @@ a:hover, #joinUs a:hover{
     margin-bottom: 0;
 }
 
-#left h2, #employees h1, #employers h1{
+#left h2, #employees h1, #employers h1, #myOffers h1, #myData h1{
     margin-top: 5px;
     font: 40px Poppins;
 }
@@ -146,7 +149,6 @@ a:hover, #joinUs a:hover{
 #employees{
     margin: 1rem 0 5rem 0;
     box-sizing: border-box;
-    padding: 0 5rem;
     width: 100%;
 }
 
@@ -176,8 +178,11 @@ a:hover, #joinUs a:hover{
     box-sizing: border-box;
 }
 
-#employers{
+#employees, #employers, #myData, #myOffers{
     padding: 0 5rem;
+}
+
+#employers{
     font: 20px Poppins;
 } 
 
@@ -246,4 +251,49 @@ footer{
         font: 14px Poppins;
         border-radius: 20px;
     }
+}
+
+#businesses{
+    overflow: hidden;
+    user-select: none;
+    width: 100vw;
+    height: 56vmin;
+    margin-bottom: 4rem;
+}
+
+#imageTrack .image{
+    transition: 0.7s;
+    width: 40vmin;
+    height: 56vmin;
+    object-fit: cover;
+    object-position: center;
+}
+
+#imageTrack .image:hover{
+    transform: scale(1.1);
+}
+
+#imageTrack{
+    overflow: hidden;
+    display: flex;
+    gap: 4vmin;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(0, 20%);
+}
+
+#myOffers{
+    width: 100%;
+    height: 50rem;
+}
+
+#myData{
+    width: 100%;
+    height: 60rem;
+}
+
+.flex{
+    display: flex;
+    flex-direction: column;
 }
