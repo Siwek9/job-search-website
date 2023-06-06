@@ -10,8 +10,10 @@
   		crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/styles/form.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
     <script src="join-us.js"></script>
+    <script src="sign-in.js" defer></script>
 </head>
 <body>
     <div class="flex">
@@ -19,7 +21,13 @@
         <a href="join-us.html">Nie mam jeszcze konta</a><br>
         <input type="text" name="username" id="" placeholder="nazwa użytkownika">
         <input type="email" name="email" id="" placeholder="e-mail">
-        <input type="password" name="password" id="" placeholder="hasło">
+        <div style="position: relative; width: 100%; ">
+            <input type="password" name="password" id="password" placeholder="hasło">
+            <input type="checkbox" id="showPassword" style="display: none;">
+            <label id="showPasswd" for="showPassword">
+                <i class="fa-regular fa-eye-slash" style="color: #658667;"></i>
+            </label>
+        </div>
         <input type="submit" value="Zaloguj się!">
     </form>
 </div>
