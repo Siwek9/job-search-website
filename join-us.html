@@ -35,10 +35,26 @@
             </div>
             <br>
             <!-- TODO: może weź pod uwage ze obok tych inputow pojawia sie taki warning ze cos jest nie tak z danymi to pozniej zrobie jeszcze walidacje w JS zeby ładnie było -->
-            <div class="relative"><input type="text" name="name"  placeholder="Nazwa Użytkownika"><i id="userName" class="fa-solid fa-circle-exclamation fa-xl fa-bounce warning-icon" style="color: rgb(238, 110, 110); position: absolute;"></i></div>
-            <div class="relative"><input type="email" name="email"  placeholder="Adres E-mail"><i id="email" class="fa-solid fa-circle-exclamation fa-xl fa-bounce warning-icon" style="color: rgb(238, 110, 110); position: absolute;"></i></div>
-            <div class="relative"><input type="password" name="password"  placeholder="Hasło"><i id="passwd" class="show fa-solid fa-circle-exclamation fa-xl fa-bounce warning-icon" style="color: rgb(238, 110, 110); position: absolute;"></i></div>
-            <div class="relative"><input type="password" name="password-repeat"  placeholder="Powtórz Hasło"><i id="passwd1" class="fa-solid fa-circle-exclamation fa-xl fa-bounce warning-icon" style="display: inline; position: absolute;"></i><span class="js-error-message">Hasło nie spełnia minimalnych wymagań.</span></div>
+            <div class="relative" id="name-form">
+                <input type="text" name="name" placeholder="Nazwa Użytkownika">
+                <i id="userName" class="fa-solid fa-circle-exclamation fa-xl fa-bounce warning-icon" style="display: inline; color: rgb(238, 110, 110); position: absolute;"></i>
+                <span class="js-error-message"></span>
+            </div>
+            <div class="relative" id="email-form">
+                <input type="text" name="email" placeholder="Adres E-mail">
+                <i id="email" class="fa-solid fa-circle-exclamation fa-xl fa-bounce warning-icon" style="color: rgb(238, 110, 110); position: absolute;"></i>
+                <span class="js-error-message"></span>
+            </div>
+            <div class="relative" id="password-form">
+                <input type="password" name="password" placeholder="Hasło">
+                <i id="passwd" class="show fa-solid fa-circle-exclamation fa-xl fa-bounce warning-icon" style="color: rgb(238, 110, 110); position: absolute;"></i>
+                <span class="js-error-message"></span>
+            </div>
+            <div class="relative" id="password-repeat-form">
+                <input type="password" name="password-repeat" placeholder="Powtórz Hasło">
+                <i id="passwd1" class="fa-solid fa-circle-exclamation fa-xl fa-bounce warning-icon" style="display: inline; position: absolute;"></i>
+                <span class="js-error-message"></span>
+            </div>
             <div id="password-tips">
                 Hasło powinno składać się z:
                 <ul>

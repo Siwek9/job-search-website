@@ -2,8 +2,29 @@ $(document).ready(function() {
     $("#register-form").on('submit', function(e) {
         e.preventDefault();
         createUser(this);
+    });
+
+    $("#name-form").on('input', function(e) {
+        var getElement = $("#name-form");
+        var getInputValue = getElement.children("input").val();
+        var getErrorElement = getElement.children(".js-error-message");
+        const regexMin = /^(?=.{3,}$)[a-zA-Z0-9_]+$/;
+        const regexMax = /^(?=.{,20}$)[a-zA-Z0-9_]+$/;
+
+        if (!regexMin.test(getInputValue)) {
+            getErrorElement.text("Hasło jest zbyt krótkie.");
+        }
+        else {
+
+        }
+
     })
-})
+});
+
+function ShowFormError(getElement, ErrorContent) {
+    getElement.children().text(ErrorContent);
+    
+}
 
 function createUser(userData) {
     $.ajax({
@@ -23,7 +44,7 @@ function createUser(userData) {
                 $("#error-message").text("Wystąpił nieoczekiwany błąd po stronie serwera. Proszę spróbować jeszcze raz.");
                 return;
             }
-            
+
             if (result.success) {
                 finishRegistration();
             }
@@ -34,7 +55,7 @@ function createUser(userData) {
                 }
                 $("#error-message").text(result.error.message);
             }
-            
+
         }
     });
 }

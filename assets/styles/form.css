@@ -149,7 +149,7 @@ label{
     top: 20%;
     transform: translateY(-20%);
     padding: .6rem;
-    max-width: 100px;
+    width: 150px;
     word-wrap: break-word;
     background-color: #ffffff;
     color: #979797;
