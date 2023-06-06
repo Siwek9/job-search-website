@@ -132,3 +132,28 @@ label{
     margin-left: -2rem;
     top: 35%;
 }
+
+.warning-icon:before {
+    color: rgb(238, 110, 110);
+}
+
+.warning-icon:hover + .js-error-message {
+    opacity: 1;
+}
+
+.js-error-message {
+    opacity: 0;
+    transition: .2s;
+    position: absolute;
+    left: 105%;
+    top: 20%;
+    transform: translateY(-20%);
+    padding: .6rem;
+    max-width: 100px;
+    word-wrap: break-word;
+    background-color: #ffffff;
+    color: #979797;
+    font-size: .8rem;
+    border-radius: 8px;
+
+}
