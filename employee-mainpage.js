@@ -13,9 +13,8 @@ window.onmouseup = e => {
 window.onmousemove = e => {
     if(track.dataset.mouseDownAt == "0") return;
     const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX, 
-          maxDelta = window.innerWidth/2;
-
-    const percentage = (mouseDelta / maxDelta) * -100,
+          maxDelta = window.innerWidth/2,
+          percentage = (mouseDelta / maxDelta) * -100,
           nextPercentageTemp = parseFloat(track.dataset.prevPercentage) + percentage,
           nextPercentage = Math.max(Math.min(nextPercentageTemp, 0), -100);
 
@@ -26,7 +25,7 @@ window.onmousemove = e => {
         transform: `translate(${nextPercentage}%, 20%)`
     }, {duration: 1200, fill:"forwards"});
 
-    for(const image of track.getElementsByClassName("image")){
+    for(const image of track.getElementsByClassName("image")){ //na querySlector nie działa
         // image.style.objectPosition = (nextPercentage + 100) + "50%";
         image.animate({
             objectPosition: `${nextPercentage + 100}% center`
