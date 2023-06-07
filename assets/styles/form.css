@@ -160,3 +160,13 @@ label{
     font-size: .8rem;
     border-radius: 8px;
 }
+
+#passwordReset{
+    background: none;
+    text-align: left;
+    margin-top: 1rem;
+}
+
+#passwordReset:hover{
+    color: #252525;
+}
