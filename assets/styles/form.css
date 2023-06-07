@@ -30,6 +30,10 @@ input[type="submit"]{
     border: 0;
 }
 
+input[type="submit"]:hover {
+    cursor: pointer;
+}
+
 .flex{
     display: flex;
     height: 100%;
