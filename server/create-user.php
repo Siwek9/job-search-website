@@ -104,13 +104,45 @@
     // creating account
     $stmtCreateUser = $connect->prepare('INSERT INTO accounts(name, email, password, account_type) VALUES (?,?,?,?)');
     $stmtCreateUser->bind_param('ssss', $name, $email, $password_hashed, $account_type);
-    $stmtCreateUser->execute();
+    $result = $stmtCreateUser->execute();
+
+    if (!$result) {
+        echo json_encode(array('success' => false, 'error' => array('type' => 'mysql_error', 'message' => "Wystąpił błąd po stronie serwera. Proszę spróbować ponownie za kilka minut.")));
+        die;
+    }
+
+    $stmtGetUserID = $connect->prepare('SELECT id FROM accounts WHERE name LIKE ? AND email LIKE ?');
+    $stmtGetUserID->bind_param('ss', $name, $email);
+    $isExecuted = $stmtGetUserID->execute();
+
+    if (!$isExecuted) {
+        echo json_encode(array('success' => false, 'error' => array('type' => 'mysql_error', 'message' => "Wystąpił błąd po stronie serwera. Proszę spróbować ponownie za kilka minut.")));
+        die;
+    }
+
+    $result = $stmtGetUserID->get_result();
+
+    if (!$result) {
+        echo json_encode(array('success' => false, 'error' => array('type' => 'mysql_error', 'message' => "Wystąpił błąd po stronie serwera. Proszę spróbować ponownie za kilka minut.")));
+        die;
+    }
+
+    $userData = $result->fetch_assoc();
+
+    if(!isset($userData['id'])) {
+        echo json_encode(array('success' => false, 'error' => array('type' => 'mysql_error', 'message' => "Wystąpił błąd po stronie serwera. Proszę spróbować ponownie za kilka minut.")));
+        die;
+    }
+
+    $connect->close();
+    echo json_encode(array('success' => true, 'accountID' => $userData['id']));
+    die;
     // use PHPMailer\PHPMailer\PHPMailer;
     // use PHPMailer\PHPMailer\Exception;
     // require("PHPMailer/src/PHPMailer.php");
     // require("PHPMailer/src/SMTP.php");
     // require("PHPMailer/src/Exception.php");
-
+    
     // $mail = new PHPMailer\PHPMailer\PHPMailer();
 
     // $mail->IsSMTP();
@@ -152,7 +184,6 @@
     //     echo "Wiadomość została wysłana!";
     // }
     
-    $connect->close();
 
     function verify_captcha($recaptcha, $secret) {
         $url = 'https://www.google.com/recaptcha/api/siteverify?secret='

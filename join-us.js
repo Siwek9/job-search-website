@@ -214,9 +214,11 @@ function createUser(userData) {
             }
 
             if (result.success) {
-                finishRegistration();
+                finishRegistration(result.accountID);
+                $("#error-message").text();
             }
             else {
+
                 if (result.error.message == undefined) {
                     $("#error-message").text("Wystąpił nieoczekiwany błąd.");
                     return;
@@ -228,6 +230,7 @@ function createUser(userData) {
     });
 }
 
-function finishRegistration() {
-
+function finishRegistration(userID) {
+    $(location).attr('href',`account-activation-script.php?userID=${userID}`);
+    // console.log(userID);
 }
