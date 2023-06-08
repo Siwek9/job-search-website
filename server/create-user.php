@@ -15,6 +15,8 @@
     $email = $_POST['email'];
     $password = $_POST['password'];
     $password_repeat = $_POST['password-repeat'];
+    $account_type = $_POST['account-type'];
+    $recaptcha = $_POST['g-recaptcha-response'];
 
     if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['password-repeat'])) {
         echo json_encode(array('success' => false, 'error' => array('type' => 'empty-fields', 'message' => "Niektóre pola są puste.")));
@@ -52,13 +54,25 @@
     if ($name == $password) {
         echo json_encode(array('success' => false, 'error' => array('type' => 'wrong-data', 'message' => "Nazwa użytkownika i hasło nie mogą być takie same.")));
         die;
-    }
+    } // check if the name isn't the same as password
+
+    if ($account_type != 'employee' && $account_type != 'employer') {
+        echo json_encode(array('success' => false, 'error' => array('type' => 'wrong-data', 'message' => "Zły typ konta.")));
+        die;
+    } // check if form output correct account type
+
+    $secret_key = '6LfxKWgmAAAAAMKyNuozldz2jW98FwZ6u1Ri3aTw';
+
+    if (!verify_captcha($recaptcha, $secret_key)) {
+        echo json_encode(array('success' => false, 'error' => array('type' => 'recaptcha', 'message' => "Brak potwierdzenia reCaptcha.")));
+        die;
+    } // check correct captcha
     
-    $password = hash('sha256', $password);
+    $password_hashed = hash('sha256', $password);
     
     require('database-functions.php');
 
-    $connect = connect_to_mysql();
+    $connect = database_connect_to_mysql();
     if (!$connect) {
         echo json_encode(array('success' => false, 'error' => array('type' => 'time-out', 'message' => "Connection Timed Out. Sprawdź połączenie internetowe.")));
         die;
@@ -77,6 +91,20 @@
         die;
     }
 
+    if (database_name_exists($connect, $name)) {
+        echo json_encode(array('success' => false, 'error' => array('type' => 'data-not-unique', 'message' => "Ta nazwa jest zajęta. Proszę spróbować inną.")));
+        die;
+    } // check if the name is used
+
+    if (database_email_exists($connect, $email)) {
+        echo json_encode(array('success' => false, 'error' => array('type' => 'data-not-unique', 'message' => "Podany adres email jest zajęty.")));
+        die;
+    } // check if the email is used
+
+    // creating account
+    $stmtCreateUser = $connect->prepare('INSERT INTO accounts(name, email, password, account_type) VALUES (?,?,?,?)');
+    $stmtCreateUser->bind_param('ssss', $name, $email, $password_hashed, $account_type);
+    $stmtCreateUser->execute();
     // use PHPMailer\PHPMailer\PHPMailer;
     // use PHPMailer\PHPMailer\Exception;
     // require("PHPMailer/src/PHPMailer.php");
@@ -117,12 +145,21 @@
     // $mail->Subject = "Testowa wiadomość SMTP"; /* Tytuł wiadomości */
     // $mail->Body = "Witaj, Jeżeli to czytasz, to znaczy, że udało się poprawnie wysłać e-maila za pomocą SMTP!";
 
-    if(!$mail->Send()) {
-        echo "Błąd wysyłania e-maila: " . $mail->ErrorInfo;
-    } 
-    else {
-        echo "Wiadomość została wysłana!";
-    }
+    // if(!$mail->Send()) {
+    //     echo "Błąd wysyłania e-maila: " . $mail->ErrorInfo;
+    // } 
+    // else {
+    //     echo "Wiadomość została wysłana!";
+    // }
     
     $connect->close();
+
+    function verify_captcha($recaptcha, $secret) {
+        $url = 'https://www.google.com/recaptcha/api/siteverify?secret='
+          . $secret . '&response=' . $recaptcha;
+        $response = file_get_contents($url);
+        $response = json_decode($response);
+
+        return $response->success;
+    }
 ?>

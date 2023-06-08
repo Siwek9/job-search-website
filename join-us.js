@@ -80,7 +80,7 @@ $(document).ready(function() {
                 HideFormError(htmlRepeatElement);
             }
             else if (!passwordRegex.test(passwordInput)) {
-                ShowFormError(htmlElement, "Niepoprawne hasło.");
+                ShowFormError(htmlElement, "Hasło nie spełnia wszystkich wymagań.");
                 HideFormError(htmlRepeatElement);
             }
             else if (passwordInput != passwordRepeatInput && passwordRegex.test(passwordRepeatInput)) {
@@ -119,7 +119,7 @@ $(document).ready(function() {
                 HideFormError(htmlElement);
             }
             else if (!passwordRegex.test(passwordRepeatInput)) {
-                ShowFormError(htmlRepeatElement, "Niepoprawne hasło.");
+                ShowFormError(htmlRepeatElement, "Hasło nie spełnia wszystkich wymagań.");
                 HideFormError(htmlElement);
             }
             else if (passwordInput != passwordRepeatInput && passwordRegex.test(passwordInput)) {
@@ -186,16 +186,12 @@ function CheckValidForm() {
 function ShowFormError(getElement, ErrorContent) {
     getElement.children(".js-error-message").text(ErrorContent);
     getElement.children(".warning-icon").css("display", "inline");
-    
 }
-
 
 function HideFormError(getElement) {
     getElement.children(".js-error-message").text("");
     getElement.children(".warning-icon").css("display", "none");
-    
 }
-
 
 function createUser(userData) {
     $.ajax({
