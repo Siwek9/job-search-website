@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $("#error-message").html("Wystąpił nieoczekiwany błąd po stronie serwera.<br> Proszę spróbować jeszcze raz.");
     isCaptchaValid = false;
     $("#register-form").on('submit', function(e) {
         e.preventDefault();
@@ -213,7 +214,7 @@ function createUser(userData) {
                 var result = JSON.parse(r);
             }
             catch(error) {
-                $("#error-message").text("Wystąpił nieoczekiwany błąd po stronie serwera. Proszę spróbować jeszcze raz.");
+                $("#error-message").text("Wystąpił nieoczekiwany błąd po stronie serwera.<br> Proszę spróbować jeszcze raz.");
                 return;
             }
 
