@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    $("#error-message").html("Wystąpił nieoczekiwany błąd po stronie serwera.<br> Proszę spróbować jeszcze raz.");
     isCaptchaValid = false;
     $("#register-form").on('submit', function(e) {
         e.preventDefault();
