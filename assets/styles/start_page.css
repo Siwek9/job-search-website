@@ -261,12 +261,34 @@ footer{
     margin-bottom: 4rem;
 }
 
+.relative{
+    position: relative;
+}
+
 #imageTrack .image{
     transition: 0.7s;
     width: 40vmin;
     height: 56vmin;
     object-fit: cover;
     object-position: center;
+    cursor: pointer;
+}
+
+
+.info{
+    background: rgba(200, 200, 200, 0.2);
+    backdrop-filter: blur(5px);
+    font: 20px Poppins;
+    width: 40vmin;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    top: 87%;
+    padding: 0.4rem 0;
+    border-radius: 10px 10px 0 0;
 }
 
 #imageTrack .image:hover{
@@ -274,7 +296,7 @@ footer{
 }
 
 #imageTrack{
-    overflow: hidden;
+    overflow-y: hidden;
     display: flex;
     gap: 4vmin;
     position: absolute;
@@ -296,4 +318,87 @@ footer{
 .flex{
     display: flex;
     flex-direction: column;
+}
+
+.cv{
+    position: relative;
+    margin-left: 1.5rem;
+    display: flex;
+    align-items: center;
+    width: 90rem;
+    font: 18px Poppins;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cv-name{
+    margin: 4rem 2rem;
+    font: 600 50px Poppins;
+}
+
+#loginPass{
+    font: 25px Poppins;
+    margin-bottom: 2rem;
+}
+
+.cv-photo img{
+    position: absolute;
+    left: 7rem;
+    top: 2rem;
+    width: 8rem;
+    height: 8rem;
+}
+
+.cv-info, .cv-job-expierience-education, .cv-abilities-interests, .cv-description{
+    border-radius: 0 10px 10px 10px;
+    background: #d9e2da;
+    width: 80rem;
+    margin: 2rem 0;
+    padding: 1.7rem 1rem;
+}
+
+.title{
+    height: 2.5rem;
+    background: #d9e2da;
+    padding: 0.2rem 0.8rem;
+    border-radius: 10px 10px 0 0;
+    font: 600 28px Poppins;
+    position: absolute;
+    left: 0;
+    top: -2rem;
+}
+
+.absolute{
+    content: "";
+    position: absolute;
+    left: 11.3rem;
+    top: 1rem;
+    width: 1rem;
+    height: 1rem;
+    background: #d9e2da;
+}
+
+.absoluteCircle{
+    border-radius: 50%;
+    content: "";
+    position: absolute;
+    left: 11.3rem;
+    top: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #ebf0eb;
+}
+
+ul{
+    margin-top: 1rem;
+}
+
+#myData h2{
+    font: 40px Poppins;
+    color: #658667;
+    margin-left: 1.5rem;
 }
