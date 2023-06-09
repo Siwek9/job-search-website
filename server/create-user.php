@@ -137,53 +137,6 @@
     $connect->close();
     echo json_encode(array('success' => true, 'accountID' => $userData['id']));
     die;
-    // use PHPMailer\PHPMailer\PHPMailer;
-    // use PHPMailer\PHPMailer\Exception;
-    // require("PHPMailer/src/PHPMailer.php");
-    // require("PHPMailer/src/SMTP.php");
-    // require("PHPMailer/src/Exception.php");
-    
-    // $mail = new PHPMailer\PHPMailer\PHPMailer();
-
-    // $mail->IsSMTP();
-    // $mail->Mailer = "smtp";
-    // $mail->CharSet="UTF-8";
-    // $mail->Host = "poczta.interia.pl"; /* Zależne od hostingu poczty*/
-    // $mail->SMTPDebug = 1;
-    // $mail->Port = 587 ; /* Zależne od hostingu poczty, czasem 587 */
-    // $mail->SMTPSecure = 'tls'; /* Jeżeli ma być aktywne szyfrowanie SSL */
-    // $mail->SMTPAuth = true;
-    // $mail->IsHTML(true);
-    // $mail->Username = "no_reply@jobsearch.hub.pl"; /* login do skrzynki email często adres*/
-    // $mail->Password = "HardPassword123_"; /* Hasło do poczty */
-    // $mail->setFrom('no_reply@jobsearch.hub.pl', 'Job Search Website Bot'); /* adres e-mail i nazwa nadawcy */
-    // $mail->AddAddress("slawomir.s@poczta.onet.pl"); /* adres lub adresy odbiorców */
-    // $mail->Subject = "Testowa wiadomość SMTP"; /* Tytuł wiadomości */
-    // $mail->Body = "Witaj, Jeżeli to czytasz, to znaczy, że udało się poprawnie wysłać e-maila za pomocą SMTP!";
-
-    // $mail->IsSMTP();
-    // $mail->Mailer = "smtp";
-    // $mail->CharSet="UTF-8";
-    // $mail->Host = "sandbox.smtp.mailtrap.io"; /* Zależne od hostingu poczty*/
-    // $mail->SMTPDebug = 1;
-    // $mail->Port = 2525 ; /* Zależne od hostingu poczty, czasem 587 */
-    // $mail->SMTPSecure = 'tls'; /* Jeżeli ma być aktywne szyfrowanie SSL */
-    // $mail->SMTPAuth = true;
-    // $mail->IsHTML(true);
-    // $mail->Username = "a99d8b2a99e624"; /* login do skrzynki email często adres*/
-    // $mail->Password = "0659b8aa881a7c"; /* Hasło do poczty */
-    // $mail->setFrom('no_reply@jobsearch.hub.pl', 'Job Search Website Bot'); /* adres e-mail i nazwa nadawcy */
-    // $mail->AddAddress("slawomir.s@poczta.onet.pl"); /* adres lub adresy odbiorców */
-    // $mail->Subject = "Testowa wiadomość SMTP"; /* Tytuł wiadomości */
-    // $mail->Body = "Witaj, Jeżeli to czytasz, to znaczy, że udało się poprawnie wysłać e-maila za pomocą SMTP!";
-
-    // if(!$mail->Send()) {
-    //     echo "Błąd wysyłania e-maila: " . $mail->ErrorInfo;
-    // } 
-    // else {
-    //     echo "Wiadomość została wysłana!";
-    // }
-    
 
     function verify_captcha($recaptcha, $secret) {
         $url = 'https://www.google.com/recaptcha/api/siteverify?secret='

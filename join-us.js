@@ -231,6 +231,6 @@ function createUser(userData) {
 }
 
 function finishRegistration(userID) {
-    $(location).attr('href',`account-activation-script.php?userID=${userID}`);
+    $(location).attr('href',`activation-sites/generate-activation-code.php?userID=${userID}`);
     // console.log(userID);
 }
