@@ -1,4 +1,6 @@
 <?php
+// mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 // returns 'mysqli_connection' if success or 'false' if failure
 function database_connect_to_mysql() {
     $connect = "";
@@ -16,22 +18,53 @@ function database_connect_to_mysql() {
     return $connect;
 }
 
+// returns bool on success or throws exception if failure
 function database_name_exists($connect, $name) {
-    $stmt = $connect->prepare("SELECT name FROM accounts WHERE name LIKE ?");
-    $stmt->bind_param("s", $name);
-    $stmt->execute();
-    $stmt->store_result();
+    $result = $connect->query("SELECT name FROM accounts WHERE name LIKE '$name'");
 
-    return boolval($stmt->num_rows());
+    if (!$result) throw new Exception("Cannot run query");
+    return boolval($result->num_rows);
 }
 
+// returns bool on success or throws exception if failure
 function database_email_exists($connect, $email) {
-    $stmt = $connect->prepare("SELECT email FROM accounts WHERE email LIKE ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $stmt->store_result();
+    $result = $connect->query("SELECT email FROM accounts WHERE name LIKE '$email'");
 
-    return boolval($stmt->num_rows());
+    if (!$result) throw new Exception("Cannot run query");
+    return boolval($result->num_rows);
+}
+
+// returns result array when transaction was successfull or false if transaction failure
+function database_transaction($connect, $queries) {
+    $connect->query("START TRANSACTION");
+    $resultArray = array();
+    $isError = false;
+
+    for ($i = 0; $i < count ($queries); $i++){
+        try {
+            if (!($resultArray[$i] = $connect->query($queries[$i]))){
+                $isError = true;
+                // echo $connect->error;
+                break;
+            }   
+        }
+        catch(Exception $e) {
+            // echo $connect->error;
+            $isError = true;
+            break;
+        }
+    }
+
+    if (!$isError){
+        $connect->query("COMMIT");
+        return $resultArray;
+    }
+    else {
+        $connect->query("ROLLBACK");
+        return false;
+    }
+
+
 }
 
 ?>

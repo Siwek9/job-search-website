@@ -90,44 +90,43 @@
         echo json_encode(array('success' => false, 'error' => array('type' => 'wrong-data', 'message' => "Błędny e-mail.")));
         die;
     }
-
-    if (database_name_exists($connect, $name)) {
-        echo json_encode(array('success' => false, 'error' => array('type' => 'data-not-unique', 'message' => "Ta nazwa jest zajęta. Proszę spróbować inną.")));
+    try {
+        if (database_name_exists($connect, $name)) {
+            echo json_encode(array('success' => false, 'error' => array('type' => 'data-not-unique', 'message' => "Ta nazwa jest zajęta. Proszę spróbować inną.")));
+            die;
+        } // check if the name is used
+    
+        if (database_email_exists($connect, $email)) {
+            echo json_encode(array('success' => false, 'error' => array('type' => 'data-not-unique', 'message' => "Podany adres email jest zajęty.")));
+            die;
+        } // check if the email is used
+    }
+    catch(Exception $e) {
+        echo json_encode(array('success' => false, 'error' => array('type' => 'time-out', 'message' => "Wystąpił błąd przy połączeniu z serwerem. Prosimy spróbować ponownie za kilka minut.")));
         die;
-    } // check if the name is used
+    }
 
-    if (database_email_exists($connect, $email)) {
-        echo json_encode(array('success' => false, 'error' => array('type' => 'data-not-unique', 'message' => "Podany adres email jest zajęty.")));
-        die;
-    } // check if the email is used
-
+    $randomCode = bin2hex(random_bytes(16));
+    $resultArray = array();
     // creating account
-    $stmtCreateUser = $connect->prepare('INSERT INTO accounts(name, email, password, account_type) VALUES (?,?,?,?)');
-    $stmtCreateUser->bind_param('ssss', $name, $email, $password_hashed, $account_type);
-    $result = $stmtCreateUser->execute();
-
-    if (!$result) {
+    if (!($resultArray = database_transaction($connect, 
+            array(
+                "INSERT INTO accounts(name, email, password, account_type) VALUES ('$name','$email','$password_hashed','$account_type')",
+                "INSERT INTO account_activation(user_id, activation_code, expiration_time) VALUES (
+                    (SELECT accounts.id FROM accounts WHERE name LIKE '$name' AND email LIKE '$email' LIMIT 1),
+                    '$randomCode', 
+                    DATE_ADD(NOW(), INTERVAL 2 MINUTE)
+                )",
+                "SELECT id FROM accounts WHERE name LIKE '$name' AND email LIKE '$email'"
+            )
+        )
+    )) 
+    {
         echo json_encode(array('success' => false, 'error' => array('type' => 'mysql_error', 'message' => "Wystąpił błąd po stronie serwera. Proszę spróbować ponownie za kilka minut.")));
         die;
     }
 
-    $stmtGetUserID = $connect->prepare('SELECT id FROM accounts WHERE name LIKE ? AND email LIKE ?');
-    $stmtGetUserID->bind_param('ss', $name, $email);
-    $isExecuted = $stmtGetUserID->execute();
-
-    if (!$isExecuted) {
-        echo json_encode(array('success' => false, 'error' => array('type' => 'mysql_error', 'message' => "Wystąpił błąd po stronie serwera. Proszę spróbować ponownie za kilka minut.")));
-        die;
-    }
-
-    $result = $stmtGetUserID->get_result();
-
-    if (!$result) {
-        echo json_encode(array('success' => false, 'error' => array('type' => 'mysql_error', 'message' => "Wystąpił błąd po stronie serwera. Proszę spróbować ponownie za kilka minut.")));
-        die;
-    }
-
-    $userData = $result->fetch_assoc();
+    $userData = $resultArray[2]->fetch_assoc();
 
     if(!isset($userData['id'])) {
         echo json_encode(array('success' => false, 'error' => array('type' => 'mysql_error', 'message' => "Wystąpił błąd po stronie serwera. Proszę spróbować ponownie za kilka minut.")));
