@@ -37,7 +37,11 @@ nav{
     align-items: center;
 }
 
-nav a, #joinUs a{
+#edit{
+    border: 0;
+}
+
+nav a, #joinUs a, #edit, #save{
     user-select: none;
     padding: 0.7rem 3rem;
     text-decoration: none;
@@ -53,7 +57,7 @@ nav a, #joinUs a{
     
 }
 
-a:hover, #joinUs a:hover{
+a:hover, #joinUs a:hover, #edit:hover, #save:hover{
     color: #f8f8f8;
     transform: scale(1.1);
 }
@@ -379,4 +383,59 @@ ul{
     font: 40px Poppins;
     color: #658667;
     margin-left: 1.5rem;
+}
+
+textarea{
+    width: 36.44rem;
+    height: 10rem;
+}
+
+button{
+    background: #658667;
+    user-select: none;
+    border: 0;
+    padding: 0.4rem 1rem;
+    text-decoration: none;
+    color: #252525;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    margin-left: 1rem;
+    font: 16px Poppins;
+    display: inline-block;
+    border-radius: 20px;
+}
+
+li{
+    font-size: 18px;
+}
+
+button:hover{
+    transform: scale(1.1);
+}
+
+input[type="file"] {
+    display: none;
+}
+
+#fileLbl:hover{
+    cursor: pointer;
+}
+
+input, textarea, #fileLbl{
+    box-sizing: border-box;
+    background: #ffffff;
+    margin: 1rem 0;
+    transition: 0.2s;
+    border-radius: 20px;
+    padding: 0.7rem 1.3rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+input[type="text"]:focus, input[type="email"]:focus,input[type="password"]:focus, input[type="tel"]:focus{
+    outline: 2px solid #7e7c7c;
+    font-size: 16px;
 }
