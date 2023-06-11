@@ -113,7 +113,7 @@ a:hover, #joinUs a:hover, #edit:hover, #save:hover{
     margin-bottom: 0;
 }
 
-#left h2, #employees h1, #employers h1, #myOffers h1, #myData h1{
+#left h2, #employees h1, #employers h1, #myOffers h1, #myData h1, #workApplications h1, #jobOffers h1{
     margin-top: 5px;
     font: 40px Poppins;
 }
@@ -182,7 +182,7 @@ a:hover, #joinUs a:hover, #edit:hover, #save:hover{
     box-sizing: border-box;
 }
 
-#employees, #employers, #myData, #myOffers{
+#employees, #employers, #myData, #myOffers ,#workApplications, #jobOffers{
     padding: 0 5rem;
 }
 
@@ -356,10 +356,26 @@ footer{
     height: 8rem;
 }
 
+.job-photo img{
+    position: absolute;
+    left: 5%;
+    top: 2rem;
+    width: 8rem;
+    height: 8rem;
+}
+
 .cv-info, .cv-job-expierience-education, .cv-abilities-interests, .cv-description{
     border-radius: 0 10px 10px 10px;
     background: #d9e2da;
     width: 80rem;
+    margin: 2rem 0;
+    padding: 1.7rem 1rem;
+}
+
+.job-info, .job-requirements, .job-desc{
+    border-radius: 0 10px 10px 10px;
+    background: #d9e2da;
+    width: 40rem;
     margin: 2rem 0;
     padding: 1.7rem 1rem;
 }
@@ -373,6 +389,18 @@ footer{
     position: absolute;
     left: 0;
     top: -2rem;
+}
+
+#addOffer{
+    margin: 0 0 2rem 0;
+}
+
+#addOffer:hover{
+    cursor: pointer;
+}
+
+#wrapper .cv{
+    margin-bottom: 3rem;
 }
 
 ul{
@@ -438,4 +466,59 @@ input, textarea, #fileLbl{
 input[type="text"]:focus, input[type="email"]:focus,input[type="password"]:focus, input[type="tel"]:focus{
     outline: 2px solid #7e7c7c;
     font-size: 16px;
+}
+
+#flex2{
+    height: 42rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.appCard{
+    width: 40rem;
+    background: #d9e2da;
+    padding: 2rem 2rem;
+    border-radius: 10px;
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.appCard button{
+    font-size: 24px;
+}
+
+.infoC{
+    display: flex;
+    flex-wrap: wrap;
+    font: 16px Poppins;
+    width: 70%;
+}
+
+.infoC img{
+    margin-right: 2rem;
+    width: 4rem;
+    height: 4rem;
+}
+
+.infoC h2{
+    font: bold 25px Poppins;
+    margin: 0;
+}
+
+.rightB{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#jobOffers{
+    margin-bottom: 3rem;
+}
+
+#wrapper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
