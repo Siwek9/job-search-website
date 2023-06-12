@@ -43,24 +43,22 @@
 
     if (!($resultArray = database_transaction($connect, 
             array(
-                "INSERT INTO user_employees() VALUES ()",
-                "UPDATE accounts SET accounts.id_user_data = (SELECT user_employees.id FROM user_employees ORDER BY user_employees.id DESC LIMIT 1) WHERE accounts.id = $userID",
+                "INSERT INTO user_{$accountType}s() VALUES ()",
+                "UPDATE accounts SET accounts.id_user_data = (SELECT user_{$accountType}s.id FROM user_{$accountType}s ORDER BY user_{$accountType}s.id DESC LIMIT 1) WHERE accounts.id = $userID",
                 "DELETE FROM account_activation WHERE user_id = $userID"
             )
         )
     )) 
     {
-        // echo $connect->? 
-        // header("Location:../index.php");
+        header("Location:../index.php");
         die;
     }
 
-
-    // $data = $result->fetch_assoc();
-
-
-
-
+    session_start();
+    session_regenerate_id();
+    $_SESSION['isLogged'] = true;
+    $_SESSION['userID'] = $userID;
+    $_SESSION['accountType'] = $accountType;
 ?>
 
 <!DOCTYPE html>
@@ -82,9 +80,9 @@
     </nav>
     <div class="flex">
         <div id="text">
-            <span style="font: 600 45px Poppins; color: #658667;">Gratulacje!</span>Twoje konto zostało akywowane. <br>
+            <span style="font: 600 45px Poppins; color: #658667;">Gratulacje!</span>Twoje konto zostało aktywowane. <br>
             <span>Aby przejść na stronę panelu, <span id="highlight">kliknij w przycisk poniżej</span>.</span><br>
-            <a href="employee_mainpage.html">Przejdź do panelu</a>
+            <a href="../mainpage.php">Przejdź do panelu</a>
         </div>
     </div>
 </body>

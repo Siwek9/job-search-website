@@ -1,3 +1,25 @@
+<?php
+    session_start();
+
+    if (empty($_SESSION['isLogged']) || empty($_SESSION['accountType'])) {
+        header("Location:index.php");
+        die;
+    }
+    
+    if ($_SESSION['accountType'] != 'employee' && $_SESSION['accountType'] != 'employer') {
+        header("Location:index.php");
+        die;
+    }
+
+    require_once('server/database-functions.php');
+
+    $connect = database_connect_to_mysql();
+
+    $result = $connect->query("SELECT * FROM user_employees WHERE user_employees.id = (SELECT accounts.id_user_data FROM accounts WHERE accounts.id = {$_SESSION['userID']});");
+
+    $userData = $result->fetch_assoc();
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -13,6 +35,18 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- TODO: pop-up ze jak sie nie zrobiło cv to sie odpala i cie prosi o zrobienie -->
+    <?php
+        
+    ?>
+    <div style:"<?php 
+        if (is_null($userData['first_name'])) {
+            echo "display: block";
+        }
+        else {
+            echo "display: none";
+        }
+    ?>" >Skompletuj swoje CV, żeby móc wysyłać swoje zgłoszenia o pracę! <a href="cv-edit.php">Napisz CV</a></div>
     <nav>
         <div id="logo">JobSE <span>Job finding made easy</span></div> <!-- Tu trzeba nazwę wymyślić. Mój pomysł JobSE (Job search) prosto i przyjemnie -->
         <div id="links">

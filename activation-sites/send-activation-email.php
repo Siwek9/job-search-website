@@ -32,6 +32,4 @@
         require('../server/mail-functions.php');
         sendMail($data['email'], "Aktywacja konta JobSE", require("activation-email.php"));
     }
-
-
 ?>

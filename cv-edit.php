@@ -1,3 +1,24 @@
+<?php
+    session_start();
+
+    if (empty($_SESSION['isLogged']) || empty($_SESSION['accountType'])) {
+        header("Location:index.php");
+        die;
+    }
+    
+    if ($_SESSION['accountType'] != 'employee' && $_SESSION['accountType'] != 'employer') {
+        header("Location:index.php");
+        die;
+    }
+
+    require_once('server/database-functions.php');
+
+    $connect = database_connect_to_mysql();
+
+    $result = $connect->query("SELECT * FROM user_employees WHERE user_employees.id = (SELECT accounts.id_user_data FROM accounts WHERE accounts.id = {$_SESSION['userID']});");
+
+    $userData = $result->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -10,7 +31,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/styles/start_page.css">
     <script src="cv-edit.js" defer></script>
-    <title>Document</title>
+    <title>Edytuj swoje CV</title>
 </head>
 <body>
     <nav>
@@ -20,7 +41,7 @@
     <div class="flex">
     <div id="myData">
         <h2>Moje CV</h2>
-        <div class="cv">
+        <form class="cv">
             <div class="cv-photo">
                 <img class="image" src="assets/images/company-logo/FajnaFirma-6.png" alt="" draggable="false">
             </div>
@@ -77,7 +98,7 @@
                 <textarea name="desc" id="" cols="30" rows="10"></textarea>
             </div>
             <button id="save">Zapisz CV</button>
-        </div>
+        </form>
         <br>
         <br>    
     </div>

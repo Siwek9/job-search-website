@@ -38,7 +38,7 @@
         }
     }
     
-    // WARNING: this is TEMPORARY for demo use because email doesn't always want to come to different email adressess than from 'onet.poczta.pl'
+    // WARNING: this is TEMPORARY for demo use because email doesn't always want to come to different email addresses than from 'onet.poczta.pl'
     // this should be deleted when own smtp server will be created
     echo "job-search-website/activation-sites/account-activated.php?userID=$userID&activationCode=$randomCode";
     
