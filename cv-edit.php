@@ -60,7 +60,7 @@
                 <b>Number telefonu:</b> <input placeholder="Numer telefonu" type="tel" name="tel" id=""> <br> <br>
                 <b>Zdjęcie</b> <input type="file" name="file" id="file"> <label for="file" id="fileLbl">Dodaj zdjęcie</label>
             </div>
-            <div class="cv-job-expierience-education relative">
+            <div class="cv-job-experience-education relative">
                 <span class="title">
                     Edukacja i Doświadczenie
                     <div style="content: ''; position: absolute;left: 24.5rem;top: 1rem;width: 1rem;height: 1rem;background: #d9e2da;"></div>
