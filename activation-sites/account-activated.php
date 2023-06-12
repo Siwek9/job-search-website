@@ -1,3 +1,68 @@
+<?php
+    if (!isset($_GET['userID']) || !isset($_GET['activationCode'])) {
+        header("Location:../index.php");
+        die;
+    }
+
+    if (!is_numeric($_GET['userID'])) {
+        header("Location:../index.php");
+        die;
+    }
+
+    $userID = $_GET['userID'];
+    $activationCode = $_GET['activationCode'];
+
+    require('../server/database-functions.php');
+
+    $connect = database_connect_to_mysql();
+    
+    if (!$connect) {
+        header("Location:../index.php");
+        die;
+    }
+
+    $resultArray = "";
+    if (!($resultArray = database_transaction($connect, 
+            array(
+                "SELECT * FROM account_activation WHERE user_id = $userID AND activation_code LIKE '$activationCode'",
+                "SELECT account_type FROM accounts WHERE id = $userID"
+            )
+        )
+    )) 
+    {
+        echo json_encode(array('success' => false, 'error' => array('type' => 'mysql_error', 'message' => "Wystąpił błąd po stronie serwera. Proszę spróbować ponownie za kilka minut.")));
+        die;
+    }
+
+    if (!$resultArray[0]->num_rows >= 1) {
+        header("Location:../index.php");
+        die;
+    }
+
+    $accountType = $resultArray[1]->fetch_assoc()['account_type'];
+
+    if (!($resultArray = database_transaction($connect, 
+            array(
+                "INSERT INTO user_employees() VALUES ()",
+                "UPDATE accounts SET accounts.id_user_data = (SELECT user_employees.id FROM user_employees ORDER BY user_employees.id DESC LIMIT 1) WHERE accounts.id = $userID",
+                "DELETE FROM account_activation WHERE user_id = $userID"
+            )
+        )
+    )) 
+    {
+        // echo $connect->? 
+        // header("Location:../index.php");
+        die;
+    }
+
+
+    // $data = $result->fetch_assoc();
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>

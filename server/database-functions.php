@@ -44,12 +44,12 @@ function database_transaction($connect, $queries) {
         try {
             if (!($resultArray[$i] = $connect->query($queries[$i]))){
                 $isError = true;
-                // echo $connect->error;
+                echo $connect->error;
                 break;
             }   
         }
         catch(Exception $e) {
-            // echo $connect->error;
+            echo $connect->error;
             $isError = true;
             break;
         }
