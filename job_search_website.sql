@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 12 Cze 2023, 21:12
+-- Czas generowania: 12 Cze 2023, 21:53
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -39,14 +39,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `account_type` enum('employee','employer') NOT NULL DEFAULT 'employee',
   `id_user_data` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Zrzut danych tabeli `accounts`
---
-
-INSERT INTO `accounts` (`id`, `name`, `email`, `password`, `account_type`, `id_user_data`) VALUES
-(50, 'Siwek9', 'slawomir.s@poczta.onet.pl', '8ef745b22baa29dda8d93f801787397d842fb9afcc6ad9ea2f84258631279e70', 'employee', NULL);
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Wyzwalacze `accounts`
@@ -74,14 +67,7 @@ CREATE TABLE IF NOT EXISTS `account_activation` (
   `expiration_time` datetime NOT NULL,
   `mail_sended` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Zrzut danych tabeli `account_activation`
---
-
-INSERT INTO `account_activation` (`id`, `user_id`, `activation_code`, `expiration_time`, `mail_sended`) VALUES
-(99, 50, 'cd89a1529b7bce1a2247d1a7d4fdc2fc', '2023-06-11 21:48:26', 1);
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -126,17 +112,15 @@ DELIMITER $$
 --
 -- Zdarzenia
 --
-DROP EVENT IF EXISTS `delete_without_activation`$$
-CREATE DEFINER=`root`@`localhost` EVENT `delete_without_activation` ON SCHEDULE EVERY 2 MINUTE STARTS '2023-06-11 08:19:12' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+DROP EVENT IF EXISTS `cleaning`$$
+CREATE DEFINER=`root`@`localhost` EVENT `cleaning` ON SCHEDULE EVERY 2 MINUTE STARTS '2023-06-12 21:39:46' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    DECLARE MaxTime TIMESTAMP;
+    SET MaxTime = CURRENT_TIMESTAMP;
     DELETE FROM accounts
-    WHERE accounts.id IN (
-        SELECT account_activation.userID 
-        FROM account_activation 
-        WHERE account_activation.expiration_time < NOW()
-    );
+    WHERE accounts.id IN (SELECT account_activation.user_id FROM account_activation WHERE account_activation.expiration_time < MaxTime);
     DELETE FROM account_activation
-    WHERE account_activation.expiration_time < NOW();
-END$$
+    WHERE account_activation.expiration_time < MaxTime;
+  END$$
 
 DELIMITER ;
 COMMIT;
