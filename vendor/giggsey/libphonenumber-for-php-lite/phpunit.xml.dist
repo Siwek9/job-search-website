@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+         bootstrap="./tests/bootstrap.php"
+         beStrictAboutTestsThatDoNotTestAnything="false"
+         convertDeprecationsToExceptions="true"
+         executionOrder="random"
+         colors="true">
+    <coverage>
+        <include>
+            <directory suffix=".php">./src/</directory>
+            <directory suffix=".php">./build/</directory>
+        </include>
+        <exclude>
+            <directory suffix=".php">./src/data/</directory>
+            <directory suffix=".php">./build/Commands/</directory>
+            <file>./build/build.php</file>
+            <file>./build/BuildApplication.php</file>
+            <file>./build/BuildMetadataPHPFromXml.php</file>
+            <file>./src/CountryCodeToRegionCodeMap.php</file>
+            <file>./src/CountryCodeToRegionCodeMapForTesting.php</file>
+        </exclude>
+    </coverage>
+    <testsuites>
+        <testsuite name="Unit Tests">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
