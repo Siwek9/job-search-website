@@ -39,7 +39,7 @@
     <?php
         
     ?>
-    <div style:"<?php 
+    <div style="<?php 
         if (is_null($userData['first_name'])) {
             echo "display: block";
         }
@@ -134,7 +134,7 @@
                 <b>E-mail:</b> aaa@aaa.com <br>
                 <b>Number telefonu:</b> 123456789
             </div>
-            <div class="cv-job-expierience-education relative">
+            <div class="cv-job-experience-education relative">
                 <span class="title">
                     Edukacja i Doświadczenie
                     <div style="content: ''; position: absolute;left: 24.5rem;top: 1rem;width: 1rem;height: 1rem;background: #d9e2da;"></div>
@@ -180,7 +180,7 @@
                 </span>
                 Nazywam się Kononowicz Krzysztof. Urodziłem się dnia dwudziestego pierwszego stycznia tysiąc dziewięćset trzeciego… sześciesiątego trzeciego roku w Kętrzynie, woe… woewództwo olsztynskie. Chcę przedstawić swój życiorys. Ukończyłem zasadniczą szkołę zawodową jako kierowca-mechanik. Posiadam swoją posiadłość – domek drewniany. Mam matkę, mam brata. Tatuś ni żyje. Ale tatuś bardzo jest mój bardzo, bardzo zasłużony. Walczył o Warszawę, walczył o Polskę, walczył o Boga. Ale nie ma ojca – odeszedł. Jak ja mówię – powołał, zmienił miejsce zamieszkania. Jest w niebie teraz. I stamtąd patrzy, jak ja kandyduje na prezydenta miasta Białegostoku. Chcę zrobić dla naszego miasta Białegostoku następujące rzeczy. Zlikwidować całkowicie dla młodzieży alkohol, papierosy i narkotyki. Usprawnić w naszym Białymstoku komunikację miejską; miejską i dalekobieżną. Tak! Bo nasza komunikacja jest bardzo, bardzo słaba, bardzo zła. Otworzyć zakłady i miejsca pracy dla młodzieży i dla ludzi. Tak! I chcę bardzo, bardzo to zrobić. Usprawnić w naszym mieście, w całym, na całym Podlasiu, żeby nie było bandyctwa, żeby nie było złodziejstwa, żeby nie było niczego. Żeby starsi ludzie mogli przejść, bo nawet teraz dochodzi do mnie – skargi, postulaty, apelują starsze ludzie, w podeszłym wieku, że młodzież zaczepia. A ja się nie dziwię się, że młodzież starszych ludzi zaczepia, napada, napadają i tak dalej. Bo młodzież nie ma pracy, nie ma pracy! Zakłady nasze w Białymstoku są rozwalane, zanim zbudowane. Zamiast usprawnić Białystok, żeby miejsca pracy, tak jak Fasty są rozwalone, tak jak mleczarnie tu w Białymstoku, tak jak Spomasz w Starosielcach. Tak jak…. i inne zakłady są rozwalane. I chcę też wyprowadzić policje na ulice. Chcę wyprowadzić policje, żeby policja pilnowała całego naszego porządku, bo od tego jest policja i straż miejska. Od tego oni są! Od tego są oni! Od tego są. A w urzędzie u mie miejskim będzie ład i porządek. Ni będzie biurokractwa, ni będzie łachmactwa, tylko naprawdę ludzie będą. Zimową porą będą szykować architekci plany budowy dróg, plany budowy dróg. Podkreślam jeszcze raz: plany budowy dróg. A na wiosnę wyjdziemy z budową ulic i… ulic, bo jakie mamy drogi? Jakie mamy? Co się stao się pod Jeżewem? Co się stao się? A kierowcy też będą przez policję surowo karani, za alkohol, za papierosy, za wszystko. I jeszcze też usprawnię granice w Kuźnicy i Bobrownikach, że granica między Białorusią a nami będzie naprawdę, naprawdę będzie granica, że ni będzie przemytu, ani papierosów, ani narkotyków, ani alkoholu. Szanowne Państwo! Kandyduję z ramienia… Polasia XXI wieku. Bardzo proszę o oddanie na mnie głos. To co przedstawiłem, swoje postulaty, to ja wszystko uczynię i na mnie warto głosować, bo ja jestem naprawdę człowiekiem uczciwym i sprawiedliwym. Nie tak, że inne partie, inne komitety, inne partie mówią, a nic ni robią, a nic ni zrobili dla miasta Białegostoku, a to co ja powiedziałem to ja wszystko uczynię, bo jestem człowiekiem wierzącym i praktykującym i wiem na jakiej zasadzie to zrobić, jak uczynić, jak usprawnić drogi, jak wszystko, jak zlikwidować papierosy, jak wszystko zlikwidować. I bardzo proszę całego miasta Białegostoku i całego Podlasia oddać na mnie głos, dziękuję państwu.
             </div>
-            <a href="cv-edit.html" id="edit">Edytuj dane</a>
+            <a href="cv-edit.php" id="edit">Edytuj dane</a>
         </div>
         <br>
         <br>    

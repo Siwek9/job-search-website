@@ -33,6 +33,9 @@
     if (is_null($userData['photo_name'])) {
         $userData['photo_name'] = "";
     }
+    if (is_null($userData['birth_date'])) {
+        $userData['birth_date'] = "";
+    }
     if (is_null($userData['about_me'])) {
         $userData['about_me'] = "";
     }
@@ -42,8 +45,8 @@
     if (is_null($userData['phone_number'])) {
         $userData['phone_number'] = "";
     }
-    if (is_null($userData['expierience'])) {
-        $userData['expierience'] = "";
+    if (is_null($userData['experience'])) {
+        $userData['experience'] = "";
     }
     if (is_null($userData['education'])) {
         $userData['education'] = "";
@@ -54,6 +57,7 @@
     if (is_null($userData['language_abilities'])) {
         $userData['language_abilities'] = "";
     }
+    // echo $userData['birth_date'];
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -63,6 +67,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script
+  		src="https://code.jquery.com/jquery-3.6.4.js"
+  		integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+  		crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/styles/start_page.css">
@@ -91,9 +99,9 @@
                     <div style="border-radius: 50%;content: '';position: absolute;left: 11.3rem;top: 0.5rem;width: 1.5rem;height: 1.5rem;background: #ebf0eb;"></div>
                 </span>
                 
-                <b>Data urodzenia: </b> <input type="date" name="dataOfBirth" id=""> <br>
-                <b>E-mail:</b> <input placeholder="E-Mail" type="email" name="email" id=""> <br>
-                <b>Number telefonu:</b> <input placeholder="Numer telefonu" type="tel" name="tel" id=""> <br> <br>
+                <b>Data urodzenia: </b> <input type="date" name="dataOfBirth" value="<?php echo $userData['birth_date']; ?>" id=""> <br>
+                <b>E-mail:</b> <input placeholder="E-Mail" type="email" name="email" value="<?php echo $userData['contact_email']; ?>" id=""> <br>
+                <b>Number telefonu:</b> <input placeholder="Numer telefonu" type="tel" name="tel" value="<?php echo $userData['phone_number']; ?>" id=""> <br> <br>
                 <b>Zdjęcie</b> <input type="file" name="file" id="file"> <label for="file" id="fileLbl">Dodaj zdjęcie</label>
             </div>
             <div class="cv-job-experience-education relative">
@@ -104,6 +112,24 @@
                 </span>
                 <b>Doświadczenie Zawodowe:</b> <button id="addExperience">Dodaj doświadczenie</button>
                 <ul id="experienceList">
+                    <?php
+                        
+                        if ($userData['experience'] != "") {
+                            $experienceList = explode(";", $userData['experience']);
+                            $i = 0;
+                            foreach ($experienceList as $experience) {
+                                // echo $experience . '<br>';
+                                $experienceValues = explode("\\", $experience);
+                                if ($experienceValues[2] == "now") {
+                                    echo "<li><input placeholder='Doświadczenie' value='{$experienceValues[0]}' type='text' name='exp[$i]'> (<input type='date' value='{$experienceValues[1]}' name='expDateFrom[$i]' > do <input type='date' class='dateToClass' value='{$experienceValues[2]}' name='expDateTo[$i]' disabled='disabled'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='expDateToNow[$i]' checked></label>)</li>";
+                                }
+                                else {
+                                    echo "<li><input placeholder='Doświadczenie' value='{$experienceValues[0]}' type='text' name='exp[$i]'> (<input type='date' value='{$experienceValues[1]}' name='expDateFrom[$i]' > do <input type='date' class='dateToClass' value='{$experienceValues[2]}' name='expDateTo[$i]'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='expDateToNow[$i]'></label>)</li>";
+                                }
+                                $i++;
+                            }
+                        }
+                    ?>
                 </ul>
                 <b>Edukacja:</b> <button id="addEducation">Dodaj edukacje</button>
                 <ul id="educationList">
