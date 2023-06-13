@@ -14,10 +14,46 @@
     require_once('server/database-functions.php');
 
     $connect = database_connect_to_mysql();
-
+    if (!$connect) {
+        header("Location:index.php");
+        die;
+    }
     $result = $connect->query("SELECT * FROM user_employees WHERE user_employees.id = (SELECT accounts.id_user_data FROM accounts WHERE accounts.id = {$_SESSION['userID']});");
-
+    if (!$result) {
+        header("Location:index.php");
+        die;
+    }
     $userData = $result->fetch_assoc();
+    if (is_null($userData['first_name'])) {
+        $userData['first_name'] = "";
+    }
+    if (is_null($userData['last_name'])) {
+        $userData['last_name'] = "";
+    }
+    if (is_null($userData['photo_name'])) {
+        $userData['photo_name'] = "";
+    }
+    if (is_null($userData['about_me'])) {
+        $userData['about_me'] = "";
+    }
+    if (is_null($userData['contact_email'])) {
+        $userData['contact_email'] = "";
+    }
+    if (is_null($userData['phone_number'])) {
+        $userData['phone_number'] = "";
+    }
+    if (is_null($userData['expierience'])) {
+        $userData['expierience'] = "";
+    }
+    if (is_null($userData['education'])) {
+        $userData['education'] = "";
+    }
+    if (is_null($userData['abilities'])) {
+        $userData['abilities'] = "";
+    }
+    if (is_null($userData['language_abilities'])) {
+        $userData['language_abilities'] = "";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -46,7 +82,7 @@
                 <img class="image" src="assets/images/company-logo/FajnaFirma-6.png" alt="" draggable="false">
             </div>
             <div class="cv-name">
-                    Kononowicz Krzysztof
+                    <input type="text" placeholder="Imię i nazwisko*" name="firstname_lastname" value="<?php echo $userData['first_name'] . " " . $userData['last_name']; ?>" id=""> 
             </div>
             <div class="cv-info relative">
                 <span class="title relative">

@@ -364,7 +364,7 @@ footer{
     height: 8rem;
 }
 
-.cv-info, .cv-job-expierience-education, .cv-abilities-interests, .cv-description{
+.cv-info, .cv-job-experience-education, .cv-abilities-interests, .cv-description{
     border-radius: 0 10px 10px 10px;
     background: #d9e2da;
     width: 80rem;
