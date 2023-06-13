@@ -57,6 +57,9 @@
     if (is_null($userData['language_abilities'])) {
         $userData['language_abilities'] = "";
     }
+    if (is_null($userData['interests'])) {
+        $userData['interests'] = "";
+    }
     // echo $userData['birth_date'];
 ?>
 <!DOCTYPE html>
@@ -87,7 +90,7 @@
         <h2>Moje CV</h2>
         <form class="cv">
             <div class="cv-photo">
-                <img class="image" src="assets/images/company-logo/FajnaFirma-6.png" alt="" draggable="false">
+                <img class="image" src="assets/images/cv-photo/<?php echo $userData['photo_name'] ?>" alt="" draggable="false">
             </div>
             <div class="cv-name">
                     <input type="text" placeholder="Imię i nazwisko*" name="firstname_lastname" value="<?php echo $userData['first_name'] . " " . $userData['last_name']; ?>" id=""> 
@@ -99,9 +102,9 @@
                     <div style="border-radius: 50%;content: '';position: absolute;left: 11.3rem;top: 0.5rem;width: 1.5rem;height: 1.5rem;background: #ebf0eb;"></div>
                 </span>
                 
-                <b>Data urodzenia: </b> <input type="date" name="dataOfBirth" value="<?php echo $userData['birth_date']; ?>" id=""> <br>
-                <b>E-mail:</b> <input placeholder="E-Mail" type="email" name="email" value="<?php echo $userData['contact_email']; ?>" id=""> <br>
-                <b>Number telefonu:</b> <input placeholder="Numer telefonu" type="tel" name="tel" value="<?php echo $userData['phone_number']; ?>" id=""> <br> <br>
+                <b>Data urodzenia*: </b> <input type="date" name="dataOfBirth" value="<?php echo $userData['birth_date']; ?>" id=""> <br>
+                <b>E-mail*:</b> <input placeholder="E-Mail" type="email" name="email" value="<?php echo $userData['contact_email']; ?>" id=""> <br>
+                <b>Number telefonu*:</b> <input placeholder="Numer telefonu" type="tel" name="tel" value="<?php echo $userData['phone_number']; ?>" id=""> <br> <br>
                 <b>Zdjęcie</b> <input type="file" name="file" id="file"> <label for="file" id="fileLbl">Dodaj zdjęcie</label>
             </div>
             <div class="cv-job-experience-education relative">
@@ -112,27 +115,41 @@
                 </span>
                 <b>Doświadczenie Zawodowe:</b> <button id="addExperience">Dodaj doświadczenie</button>
                 <ul id="experienceList">
-                    <?php
-                        
-                        if ($userData['experience'] != "") {
-                            $experienceList = explode(";", $userData['experience']);
-                            $i = 0;
-                            foreach ($experienceList as $experience) {
-                                // echo $experience . '<br>';
-                                $experienceValues = explode("\\", $experience);
-                                if ($experienceValues[2] == "now") {
-                                    echo "<li><input placeholder='Doświadczenie' value='{$experienceValues[0]}' type='text' name='exp[$i]'> (<input type='date' value='{$experienceValues[1]}' name='expDateFrom[$i]' > do <input type='date' class='dateToClass' value='{$experienceValues[2]}' name='expDateTo[$i]' disabled='disabled'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='expDateToNow[$i]' checked></label>)</li>";
-                                }
-                                else {
-                                    echo "<li><input placeholder='Doświadczenie' value='{$experienceValues[0]}' type='text' name='exp[$i]'> (<input type='date' value='{$experienceValues[1]}' name='expDateFrom[$i]' > do <input type='date' class='dateToClass' value='{$experienceValues[2]}' name='expDateTo[$i]'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='expDateToNow[$i]'></label>)</li>";
-                                }
-                                $i++;
+                <?php
+                    if ($userData['experience'] != "") {
+                        $experienceList = explode(";", $userData['experience']);
+                        $i = 0;
+                        foreach ($experienceList as $experience) {
+                            $experienceValues = explode("\\", $experience);
+                            if ($experienceValues[2] == "now") {
+                                echo "<li><input placeholder='Doświadczenie' value='{$experienceValues[0]}' type='text' name='exp[$i]'> (<input type='date' value='{$experienceValues[1]}' name='expDateFrom[$i]' > do <input type='date' class='dateToClass' value='{$experienceValues[2]}' name='expDateTo[$i]' disabled='disabled'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='expDateToNow[$i]' checked></label>)</li>";
                             }
+                            else {
+                                echo "<li><input placeholder='Doświadczenie' value='{$experienceValues[0]}' type='text' name='exp[$i]'> (<input type='date' value='{$experienceValues[1]}' name='expDateFrom[$i]' > do <input type='date' class='dateToClass' value='{$experienceValues[2]}' name='expDateTo[$i]'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='expDateToNow[$i]'></label>)</li>";
+                            }
+                            $i++;
                         }
-                    ?>
+                    }
+                ?>
                 </ul>
                 <b>Edukacja:</b> <button id="addEducation">Dodaj edukacje</button>
                 <ul id="educationList">
+                <?php
+                    if ($userData['education'] != "") {
+                        $educationList = explode(";", $userData['education']);
+                        $j = 0;
+                        foreach ($educationList as $education) {
+                            $educationValues = explode("\\", $education);
+                            if ($educationValues[2] == "now") {
+                                echo "<li><input placeholder='Edukacja' value='{$educationValues[0]}' type='text' name='edu[$j]'> (<input type='date' value='{$educationValues[1]}' name='eduDateFrom[$j]' > do <input type='date' name='eduDateTo[$j]' value='{$educationValues[2]}' class='dateToClass' disabled='disabled'> <label for='expDateToNow[$j]'>teraz <input type='checkbox' class='data-now' name='expDateToNow[$j]' checked></label>)</li>";
+                            }
+                            else {
+                                echo "<li><input placeholder='Edukacja' value='{$educationValues[0]}' type='text' name='edu[$j]'> (<input type='date' value='{$educationValues[0]}' name='eduDateFrom[$j]' > do <input type='date' name='eduDateTo[$j]' value='{$educationValues[2]}' class='dateToClass'> <label for='expDateToNow[$j]'>teraz <input type='checkbox' class='data-now' name='expDateToNow[$j]'></label>)</li>";
+                            }
+                            $j++;
+                        }
+                    }
+                ?>
                 </ul>
             </div>
             <div class="cv-abilities-interests relative">
@@ -143,12 +160,43 @@
                 </span>
                 <b>Znajomość języków:</b> <button id="addLanguage">Dodaj język</button>
                 <ul id="languageList">
+                <?php
+                    if ($userData['language_abilities'] != "") {
+                        $languageList = explode(";", $userData['language_abilities']);
+                        $k = 0;
+                        foreach ($languageList as $language) {
+                            $languageValues = explode('\\', $language);
+                            echo "<li><input placeholder='Język' value='{$languageValues[0]}' type='text' name='lan[$k]'> (<input placeholder='Poziom' value='{$languageValues[1]}' type='text' name='lanLevel[$k]' >)</li>";
+                            $k++;
+                        }
+                    }
+                ?>
                 </ul>
                 <b>Umiejętności:</b> <button id="addSkill">Dodaj umiejętność</button>
                 <ul id="skillList">
+                <?php
+                    if ($userData['abilities'] != "") {
+                        $skillList = explode(";", $userData['abilities']);
+                        $l = 0;
+                        foreach ($skillList as $skill) {
+                            echo "<li><input placeholder='Umiejętność' value='$skill' type='text' name='skill[$l]'></li>";
+                            $l++;
+                        }
+                    }
+                ?>
                 </ul>
                 <b>Zainteresowania:</b> <button id="addInterest">Dodaj zainteresowanie</button>
                 <ul id="interestList">
+                <?php
+                    if ($userData['interests'] != "") {
+                        $interestsList = explode(";", $userData['interests']);
+                        $m = 0;
+                        foreach ($interestsList as $interests) {
+                            echo "<li><input placeholder='Zainteresowanie' value='$interests' type='text' name='interests[$m]'></li>";
+                            $m++;
+                        }
+                    }
+                ?>
                 </ul>
             </div>
             <div class="cv-description relative">
@@ -157,8 +205,9 @@
                     <div style="content: ''; position: absolute;left: 7.96rem;top: 1rem;width: 1rem;height: 1rem;background: #d9e2da;"></div>
                     <div style="border-radius: 50%;content: '';position: absolute;left: 7.96rem;top: 0.5rem;width: 1.5rem;height: 1.5rem;background: #ebf0eb;"></div>
                 </span>
-                <textarea name="desc" id="" cols="30" rows="10"></textarea>
+                <textarea style="resize: none" name="desc" id="" cols="30" rows="10"><?php echo $userData['about_me'] ?></textarea>
             </div>
+            <div id="error-message"></div>
             <button id="save">Zapisz CV</button>
         </form>
         <br>
