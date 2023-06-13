@@ -77,10 +77,12 @@
   		src="https://code.jquery.com/jquery-3.6.4.js"
   		integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
   		crossorigin="anonymous"></script>
+    <script src="server/country-select-js/js/countrySelect.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="server/country-select-js/css/countrySelect.css">
-    <script src="server/country-select-js/js/countrySelect.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
     <link rel="stylesheet" href="assets/styles/start_page.css">
     <script src="cv-edit.js" defer></script>
     <title>Edytuj swoje CV</title>
@@ -98,7 +100,7 @@
                 <img class="image" src="assets/images/cv-photo/<?php echo $userData['photo_name'] ?>" alt="" draggable="false">
             </div>
             <div class="cv-name">
-                    <input type="text" placeholder="Imię i nazwisko*" name="firstname_lastname" value="<?php echo $userData['first_name'] . " " . $userData['last_name']; ?>" id=""> 
+                    <input type="text" placeholder="Imię i nazwisko*" name="firstnameLastname" value="<?php echo $userData['first_name'] . " " . $userData['last_name']; ?>" id=""> 
             </div>
             <div class="cv-info relative">
                 <span class="title relative">
@@ -107,17 +109,26 @@
                     <div style="border-radius: 50%;content: '';position: absolute;left: 11.3rem;top: 0.5rem;width: 1.5rem;height: 1.5rem;background: #ebf0eb;"></div>
                 </span>
                 
-                <b>Data urodzenia*: </b> <input type="date" name="dataOfBirth" value="<?php echo $userData['birth_date']; ?>" id=""> <br>
-                <b>E-mail*:</b> <input placeholder="E-Mail" type="email" name="email" value="<?php echo $userData['contact_email']; ?>" id=""> <br>
-                <b>Narodowość*:</b> <input type="text" name="nationality" id="country"> <br>
+                <b>Data urodzenia*: </b> <input type="date" name="dateOfBirth" value="<?php echo $userData['birth_date']; ?>" id=""> <br>
+                <b>E-mail*:</b> <input placeholder="E-Mail" type="email" name="email" value="<?php echo $userData['contact_email']; ?>" id=""> <br> 
+                <b>Narodowość*:</b> <input type="text" name="nationality" id="country"> <br> <br>
                 <script>
                     $("#country").countrySelect({
                         defaultCountry: "<?php echo $userData['nationality'] ?>",
                         preferredCountries: ["pl", "gb", "us", "ua", "de"]
                     });
                 </script>
-                <b>Number telefonu*:</b> <input placeholder="Numer telefonu" type="tel" name="tel" value="<?php echo $userData['phone_number']; ?>" id=""> <br> <br>
-                <b>Zdjęcie</b> <input type="file" name="file" id="file"> <label for="file" id="fileLbl">Dodaj zdjęcie</label>
+                <b>Number telefonu:</b> <input name="phoneNumber" id="phone"> <br> <br>
+                <script>
+                    var phoneInput = document.querySelector("#phone");
+                    window.intlTelInput(phoneInput, {
+                        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
+                        preferredCountries: ["pl", "gb", "us", "ua", "de"]
+                    });
+                    var iti = intlTelInput(phoneInput);``
+                    iti.setNumber("<?php echo $userData['phone_number'] ?>");
+                  </script>
+                <b>Zdjęcie</b> <input type="file" name="photo" id="file"> <label for="file" id="fileLbl">Dodaj zdjęcie</label>
             </div>
             <div class="cv-job-experience-education relative">
                 <span class="title">
@@ -134,7 +145,8 @@
                         foreach ($experienceList as $experience) {
                             $experienceValues = explode("\\", $experience);
                             if ($experienceValues[2] == "now") {
-                                echo "<li><input placeholder='Doświadczenie' value='{$experienceValues[0]}' type='text' name='exp[$i]'> (<input type='date' value='{$experienceValues[1]}' name='expDateFrom[$i]' > do <input type='date' class='dateToClass' value='{$experienceValues[2]}' name='expDateTo[$i]' disabled='disabled'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='expDateTo[$i]' checked></label>)</li>";
+                                $now = date("Y-m-d");
+                                echo "<li><input placeholder='Doświadczenie' value='{$experienceValues[0]}' type='text' name='exp[$i]'> (<input type='date' value='{$experienceValues[1]}' name='expDateFrom[$i]' > do <input type='date' class='dateToClass' value='{$now}' name='expDateTo[$i]' disabled='disabled'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='expDateTo[$i]' checked></label>)</li>";
                             }
                             else {
                                 echo "<li><input placeholder='Doświadczenie' value='{$experienceValues[0]}' type='text' name='exp[$i]'> (<input type='date' value='{$experienceValues[1]}' name='expDateFrom[$i]' > do <input type='date' class='dateToClass' value='{$experienceValues[2]}' name='expDateTo[$i]'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='expDateTo[$i]'></label>)</li>";
@@ -153,10 +165,11 @@
                         foreach ($educationList as $education) {
                             $educationValues = explode("\\", $education);
                             if ($educationValues[2] == "now") {
-                                echo "<li><input placeholder='Edukacja' value='{$educationValues[0]}' type='text' name='edu[$j]'> (<input type='date' value='{$educationValues[1]}' name='eduDateFrom[$j]' > do <input type='date' name='eduDateTo[$j]' value='{$educationValues[2]}' class='dateToClass' disabled='disabled'> <label for='eduDateTo[$j]'>teraz <input type='checkbox' class='data-now' name='eduDateTo[$j]' checked></label>)</li>";
+                                $now = date("Y-m-d");
+                                echo "<li><input placeholder='Edukacja' value='{$educationValues[0]}' type='text' name='edu[$j]'> (<input type='date' value='{$educationValues[1]}' name='eduDateFrom[$j]' > do <input type='date' name='eduDateTo[$j]' value='{$now}' class='dateToClass' disabled='disabled'> <label for='eduDateTo[$j]'>teraz <input type='checkbox' class='data-now' name='eduDateTo[$j]' checked></label>)</li>";
                             }
                             else {
-                                echo "<li><input placeholder='Edukacja' value='{$educationValues[0]}' type='text' name='edu[$j]'> (<input type='date' value='{$educationValues[0]}' name='eduDateFrom[$j]' > do <input type='date' name='eduDateTo[$j]' value='{$educationValues[2]}' class='dateToClass'> <label for='eduDateTo[$j]'>teraz <input type='checkbox' class='data-now' name='eduDateTo[$j]'></label>)</li>";
+                                echo "<li><input placeholder='Edukacja' value='{$educationValues[0]}' type='text' name='edu[$j]'> (<input type='date' value='{$educationValues[1]}' name='eduDateFrom[$j]' > do <input type='date' name='eduDateTo[$j]' value='{$educationValues[2]}' class='dateToClass'> <label for='eduDateTo[$j]'>teraz <input type='checkbox' class='data-now' name='eduDateTo[$j]'></label>)</li>";
                             }
                             $j++;
                         }
@@ -217,7 +230,7 @@
                     <div style="content: ''; position: absolute;left: 7.96rem;top: 1rem;width: 1rem;height: 1rem;background: #d9e2da;"></div>
                     <div style="border-radius: 50%;content: '';position: absolute;left: 7.96rem;top: 0.5rem;width: 1.5rem;height: 1.5rem;background: #ebf0eb;"></div>
                 </span>
-                <textarea style="resize: none" name="desc" id="" cols="30" rows="10"><?php echo $userData['about_me'] ?></textarea>
+                <textarea style="resize: none" name="description" id="" cols="30" rows="10"><?php echo $userData['about_me'] ?></textarea>
             </div>
             <div id="error-message"></div>
             <button id="save">Zapisz CV</button>

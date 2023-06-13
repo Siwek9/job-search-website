@@ -80,6 +80,9 @@ $(document).ready(function() {
         e.preventDefault();
         var dataToSend = new FormData(this);
         dataToSend.set("nationality", $("#country").countrySelect("getSelectedCountryData").iso2);
+        if (iti.isValidNumber()) {
+            dataToSend.set("phoneNumber", iti.getNumber());
+        }
         $.ajax({
             type: "POST",
             url: 'server/change-user-cv.php',
