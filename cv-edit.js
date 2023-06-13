@@ -16,7 +16,7 @@ window.addEventListener("load", function() {
 let i = 0;
 addExp.addEventListener("click", function(e){
     e.preventDefault();
-    document.querySelector("#experienceList").innerHTML += `<li><input placeholder='Doświadczenie' type='text' name='exp[${i}]'> (<input type='date' name='expDateFrom[${i}]' > do <input type='date' class='dateToClass' name='expDateTo[${i}]'> <label for='expDateToNow[${i}]'>teraz <input type='checkbox' class='data-now' name='expDateToNow[${i}]'></label>)</li>`;
+    document.querySelector("#experienceList").innerHTML += `<li><input placeholder='Doświadczenie' type='text' name='exp[${i}]'> (<input type='date' name='expDateFrom[${i}]' > do <input type='date' class='dateToClass' name='expDateTo[${i}]'> <label for='expDateTo[${i}]'>teraz <input type='checkbox' class='data-now' name='expDateTo[${i}]'></label>)</li>`;
     $(".data-now").off('click');
     $(".data-now").click(function() {
         if (this.checked) {
@@ -32,7 +32,7 @@ addExp.addEventListener("click", function(e){
 let j = 0;
 addEdu.addEventListener("click", function(e){
     e.preventDefault();
-    document.querySelector("#educationList").innerHTML += `<li><input placeholder='Edukacja' type='text' name='edu[${j}]'> (<input type='date' name='eduDateFrom[${j}]' > do <input type='date' name='eduDateTo[${j}]' class='dateToClass'> <label for='expDateToNow[${j}]'>teraz <input type='checkbox' class='data-now' name='expDateToNow[${j}]'></label>)</li>`;
+    document.querySelector("#educationList").innerHTML += `<li><input placeholder='Edukacja' type='text' name='edu[${j}]'> (<input type='date' name='eduDateFrom[${j}]' > do <input type='date' name='eduDateTo[${j}]' class='dateToClass'> <label for='expDateTo[${j}]'>teraz <input type='checkbox' class='data-now' name='expDateTo[${j}]'></label>)</li>`;
     $(".data-now").off('click');
     $(".data-now").click(function() {
         if (this.checked) {
@@ -75,4 +75,45 @@ $(document).ready(function() {
             $(this).parent().siblings(".dateToClass").removeAttr("disabled");
         }
     });
+
+    $("#cv-form").on("submit", function(e) {
+        e.preventDefault();
+        var dataToSend = new FormData(this);
+        dataToSend.set("nationality", $("#country").countrySelect("getSelectedCountryData").iso2);
+        $.ajax({
+            type: "POST",
+            url: 'server/change-user-cv.php',
+            data: dataToSend,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(r) {
+                var result;
+                console.log(r);
+                try {
+                    var result = JSON.parse(r);
+                }
+                catch(error) {
+                    $("#error-message").text("Wystąpił nieoczekiwany błąd po stronie serwera.<br> Proszę spróbować jeszcze raz.");
+                    return;
+                }
+    
+                if (result.success) {
+                    finishCV(result.accountID);
+                    $("#error-message").text();
+                }
+                else {
+                    if (result.error.message == undefined) {
+                        $("#error-message").text("Wystąpił nieoczekiwany błąd.");
+                        return;
+                    }
+                    $("#error-message").text(result.error.message);
+                }
+            }
+        });
+    });
+
+    function finishCV() {
+        $(location).attr('href',`employee-mainpage.php`);
+    }
 });

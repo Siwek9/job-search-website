@@ -6,7 +6,7 @@
         die;
     }
     
-    if ($_SESSION['accountType'] != 'employee' && $_SESSION['accountType'] != 'employer') {
+    if ($_SESSION['accountType'] != 'employee') {
         header("Location:index.php");
         die;
     }
