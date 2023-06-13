@@ -124,7 +124,6 @@
     {
         echo json_encode(array('success' => false, 'error' => array('type' => 'mysql_error', 'message' => "Wystąpił błąd po stronie serwera. Proszę spróbować ponownie za kilka minut.")));
         die;
-        
     }
 
     $userData = $resultArray[2]->fetch_assoc();

@@ -8,11 +8,12 @@
   		src="https://code.jquery.com/jquery-3.6.4.js"
   		integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
   		crossorigin="anonymous"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="stylesheet" href="assets/styles/form.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
-    <script src="join-us.js"></script>
+    <!-- <script src="join-us.js"></script> -->
     <script src="sign-in.js" defer></script>
 </head>
 <body>
@@ -28,7 +29,12 @@
                 <i class="fa-regular fa-eye-slash" style="color: #658667;"></i>
             </label>
         </div>
+        <label for="rememberMe">Pamiętaj mnie <input type="checkbox" name="rememberMe" id=""></label>
+        <div class="flex">
+            <div class="g-recaptcha" data-sitekey="6LfxKWgmAAAAAO4QYHTpW8nL94fbRJzGfNtbtC76"></div>
+        </div>
         <input type="submit" value="Zaloguj się!">
+        <div id="error-message"></div>
         <a href="password-reset.html" id="passwordReset">Nie pamiętam hasła</a>
     </form>
 </div>

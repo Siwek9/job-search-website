@@ -203,7 +203,6 @@ function createUser(userData) {
         processData: false,
         success: function(r) {
             grecaptcha.reset($(".g-recaptcha")[0]);
-            console.log(r);
             var result;
             try {
                 var result = JSON.parse(r);
@@ -218,14 +217,12 @@ function createUser(userData) {
                 $("#error-message").text();
             }
             else {
-
                 if (result.error.message == undefined) {
                     $("#error-message").text("Wystąpił nieoczekiwany błąd.");
                     return;
                 }
                 $("#error-message").text(result.error.message);
             }
-
         }
     });
 }
