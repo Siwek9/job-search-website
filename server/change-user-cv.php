@@ -194,9 +194,9 @@
     }
     
     if ($_POST['photo_changed'] === "true") {
-        if(@move_uploaded_file($tempName, "../assets/images/cv-photo/$photoName")) {
+        if(move_uploaded_file($tempName, "../assets/images/cv-photo/$photoName")) {
             if ($photoName != $photoOldName) {
-                if (unlink($photoOldName)) {
+                if (unlink("../assets/images/cv-photo/$photoOldName")) {
                     $connect->query("COMMIT");
                 }
                 else {

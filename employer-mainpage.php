@@ -1,3 +1,25 @@
+<?php
+    session_start();
+
+    if (empty($_SESSION['isLogged']) || empty($_SESSION['accountType'])) {
+        header("Location:index.php");
+        die;
+    }
+    
+    if ($_SESSION['accountType'] != 'employer') {
+        header("Location:index.php");
+        die;
+    }
+
+    require_once('server/database-functions.php');
+
+    $connect = database_connect_to_mysql();
+
+    $result = $connect->query("SELECT * FROM user_employers WHERE user_employers.id = (SELECT accounts.id_user_data FROM accounts WHERE accounts.id = {$_SESSION['userID']});");
+
+    $userData = $result->fetch_assoc();
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -18,7 +40,7 @@
             <a href="#workApplications">Zgłoszenia o pracę</a>
             <a href="#jobOffers">Moje oferty</a>
             <a href="#myData">Moje Dane</a>
-            <a href="start.html">Wyloguj się</a>
+            <a href="server/logout-user.php">Wyloguj się</a>
         </div>
     </nav>
     <div class="flex">
