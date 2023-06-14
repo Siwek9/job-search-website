@@ -191,7 +191,7 @@
                     </span>
                     Przyjemna prosta praca.    
                 </div>
-                <a href="cv-edit.html" id="edit">Edytuj dane</a>
+                <a href="offer-edit.html" id="edit">Edytuj dane</a>
             </div>
 
             <div class="cv" style="width: 50rem;">
