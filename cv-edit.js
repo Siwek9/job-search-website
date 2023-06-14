@@ -16,7 +16,7 @@ window.addEventListener("load", function() {
 let i = 0;
 addExp.addEventListener("click", function(e){
     e.preventDefault();
-    document.querySelector("#experienceList").innerHTML += `<li><input placeholder='Doświadczenie' type='text' name='exp[${i}]'> (<input type='date' name='expDateFrom[${i}]' > do <input type='date' class='dateToClass' name='expDateTo[${i}]'> <label for='expDateTo[${i}]'>teraz <input type='checkbox' class='data-now' name='expDateTo[${i}]'></label>)</li>`;
+    document.querySelector("#experienceList").innerHTML += `<li><input placeholder='Doświadczenie' maxlength="100" type='text' name='experience[name][${i}]'> (<input type='date' name='experience[dateFrom][${i}]' > do <input type='date' class='dateToClass' name='experience[dateTo][${i}]'> <label for='experience[dateTo][${i}]'>teraz <input type='checkbox' class='data-now' name='experience[dateTo][${i}]'></label>)</li>`;
     $(".data-now").off('click');
     $(".data-now").click(function() {
         if (this.checked) {
@@ -32,7 +32,7 @@ addExp.addEventListener("click", function(e){
 let j = 0;
 addEdu.addEventListener("click", function(e){
     e.preventDefault();
-    document.querySelector("#educationList").innerHTML += `<li><input placeholder='Edukacja' type='text' name='edu[${j}]'> (<input type='date' name='eduDateFrom[${j}]' > do <input type='date' name='eduDateTo[${j}]' class='dateToClass'> <label for='expDateTo[${j}]'>teraz <input type='checkbox' class='data-now' name='expDateTo[${j}]'></label>)</li>`;
+    document.querySelector("#educationList").innerHTML += `<li><input placeholder='Edukacja' maxlength="100" type='text' name='education[name][${j}]'> (<input type='date' name='education[dateFrom][${j}]' > do <input type='date' name='education[dateTo][${j}]' class='dateToClass'> <label for='education[dateTo][${j}]'>teraz <input type='checkbox' class='data-now' name='education[dateTo][${j}]'></label>)</li>`;
     $(".data-now").off('click');
     $(".data-now").click(function() {
         if (this.checked) {
@@ -48,21 +48,21 @@ addEdu.addEventListener("click", function(e){
 let k = 0;
 addLan.addEventListener("click", function(e){
     e.preventDefault();
-    document.querySelector("#languageList").innerHTML += `<li><input placeholder='Język' type='text' name='lan[${k}]'> (<input placeholder='Poziom' type='text' name='lanLevel[${k}]' >)</li>`;
+    document.querySelector("#languageList").innerHTML += `<li><input placeholder='Język' maxlength="50" type='text' name='language[name][${k}]'> (<input placeholder='Poziom' maxlength="20" type='text' name='language[level][${k}]' >)</li>`;
     k++;
 });
 
 let l = 0;
 addSkill.addEventListener("click", function(e){
     e.preventDefault();
-    document.querySelector("#skillList").innerHTML += `<li><input placeholder='Umiejętność' type='text' name='skill[${l}]'></li>`;
+    document.querySelector("#skillList").innerHTML += `<li><input placeholder='Umiejętność' maxlength="50" type='text' name='skill[${l}]'></li>`;
     l++;
 });
 
 let m = 0;
 addInt.addEventListener("click", function(e){
     e.preventDefault();
-    document.querySelector("#interestList").innerHTML += `<li><input placeholder='Zainteresowanie' type='text' name='interest[${m}]'></li>`;
+    document.querySelector("#interestList").innerHTML += `<li><input placeholder='Zainteresowanie' maxlength="50" type='text' name='interest[${m}]'></li>`;
     m++;
 });
 
@@ -76,6 +76,8 @@ $(document).ready(function() {
         }
     });
 
+    var photoChange = false;
+
     $("#cv-form").on("submit", function(e) {
         e.preventDefault();
         var dataToSend = new FormData(this);
@@ -83,6 +85,11 @@ $(document).ready(function() {
         if (iti.isValidNumber()) {
             dataToSend.set("phoneNumber", iti.getNumber());
         }
+        dataToSend.set("photo_changed", photoChange);
+        // if ($('#file').val() == "" && $('.cv-photo').children("img").attr("src") != undefined) {
+        //     var oldFilePath = $('.cv-photo').children("img").attr("src");
+        //     dataToSend.set("photo_name", oldFilePath.substr(oldFilePath.lastIndexOf('/') + 1));
+        // }
         $.ajax({
             type: "POST",
             url: 'server/change-user-cv.php',
@@ -119,4 +126,19 @@ $(document).ready(function() {
     function finishCV() {
         $(location).attr('href',`employee-mainpage.php`);
     }
+
+    $('#file').change(function(){
+        var input = this;
+        var url = $(this).val();
+        var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+        if (input.files && input.files[0]&& (ext == "png" || ext == "jpeg" || ext == "jpg")) 
+        {
+            var reader = new FileReader();
+            reader.onload = function(e) { 
+                $('.cv-photo').children("img").attr('src', e.target.result);
+                photoChange = true;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
 });

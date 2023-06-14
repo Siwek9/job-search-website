@@ -97,10 +97,18 @@
         <h2>Moje CV</h2>
         <form id="cv-form" class="cv">
             <div class="cv-photo">
-                <img class="image" src="assets/images/cv-photo/<?php echo $userData['photo_name'] ?>" alt="" draggable="false">
+            <?php
+                if ($userData['photo_name']) {
+                    echo "<img class='image' src='assets/images/cv-photo/{$userData['photo_name']}' alt='Zdjęcie na CV' draggable='false'>";
+                }
+                else {
+                    echo "<img draggable='false'>";
+                }
+            ?>
             </div>
             <div class="cv-name">
-                    <input type="text" placeholder="Imię i nazwisko*" name="firstnameLastname" value="<?php echo $userData['first_name'] . " " . $userData['last_name']; ?>" id=""> 
+                <!-- DATA: First Name and Last Name -->
+                <input type="text" placeholder="Imię i nazwisko*" maxlength="50" name="firstNameLastName" value="<?php echo $userData['first_name'] . " " . $userData['last_name']; ?>" id=""> 
             </div>
             <div class="cv-info relative">
                 <span class="title relative">
@@ -108,9 +116,12 @@
                     <div style="content: ''; position: absolute;left: 11.3rem;top: 1rem;width: 1rem;height: 1rem;background: #d9e2da;"></div>
                     <div style="border-radius: 50%;content: '';position: absolute;left: 11.3rem;top: 0.5rem;width: 1.5rem;height: 1.5rem;background: #ebf0eb;"></div>
                 </span>
-                
+
+                <!-- DATA: Date Birth -->
                 <b>Data urodzenia*: </b> <input type="date" name="dateOfBirth" value="<?php echo $userData['birth_date']; ?>" id=""> <br>
-                <b>E-mail*:</b> <input placeholder="E-Mail" type="email" name="email" value="<?php echo $userData['contact_email']; ?>" id=""> <br> 
+                <!-- DATA: E-mail -->
+                <b>E-mail*:</b> <input placeholder="E-Mail" type="email" maxlength="50" name="email" value="<?php echo $userData['contact_email']; ?>" id=""> <br> 
+                <!-- DATA: Nationality -->
                 <b>Narodowość*:</b> <input type="text" name="nationality" id="country"> <br> <br>
                 <script>
                     $("#country").countrySelect({
@@ -118,6 +129,7 @@
                         preferredCountries: ["pl", "gb", "us", "ua", "de"]
                     });
                 </script>
+                <!-- DATA: Phone Number -->
                 <b>Number telefonu:</b> <input name="phoneNumber" id="phone"> <br> <br>
                 <script>
                     var phoneInput = document.querySelector("#phone");
@@ -128,7 +140,8 @@
                     var iti = intlTelInput(phoneInput);``
                     iti.setNumber("<?php echo $userData['phone_number'] ?>");
                   </script>
-                <b>Zdjęcie</b> <input type="file" name="photo" id="file"> <label for="file" id="fileLbl">Dodaj zdjęcie</label>
+                <!-- DATA: Photo -->
+                <b>Zdjęcie</b> <input type="file" name="photo" id="file" accept=".png,.jpg,.jpeg"> <label for="file" id="fileLbl">Dodaj zdjęcie</label>
             </div>
             <div class="cv-job-experience-education relative">
                 <span class="title">
@@ -136,6 +149,7 @@
                     <div style="content: ''; position: absolute;left: 24.5rem;top: 1rem;width: 1rem;height: 1rem;background: #d9e2da;"></div>
                     <div style="border-radius: 50%;content: '';position: absolute;left: 24.5rem;top: 0.5rem;width: 1.5rem;height: 1.5rem;background: #ebf0eb;"></div>
                 </span>
+                <!-- DATA: Experience -->
                 <b>Doświadczenie Zawodowe:</b> <button id="addExperience">Dodaj doświadczenie</button>
                 <ul id="experienceList">
                 <?php
@@ -146,16 +160,17 @@
                             $experienceValues = explode("\\", $experience);
                             if ($experienceValues[2] == "now") {
                                 $now = date("Y-m-d");
-                                echo "<li><input placeholder='Doświadczenie' value='{$experienceValues[0]}' type='text' name='exp[$i]'> (<input type='date' value='{$experienceValues[1]}' name='expDateFrom[$i]' > do <input type='date' class='dateToClass' value='{$now}' name='expDateTo[$i]' disabled='disabled'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='expDateTo[$i]' checked></label>)</li>";
+                                echo "<li><input placeholder='Doświadczenie' maxlength='100' value='{$experienceValues[0]}' type='text' name='experience[name][$i]'> (<input type='date' value='{$experienceValues[1]}' name='experience[dateFrom][$i]' > do <input type='date' class='dateToClass' value='{$now}' name='experience[dateTo][$i]' disabled='disabled'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='experience[dateTo][$i]' checked></label>)</li>";
                             }
                             else {
-                                echo "<li><input placeholder='Doświadczenie' value='{$experienceValues[0]}' type='text' name='exp[$i]'> (<input type='date' value='{$experienceValues[1]}' name='expDateFrom[$i]' > do <input type='date' class='dateToClass' value='{$experienceValues[2]}' name='expDateTo[$i]'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='expDateTo[$i]'></label>)</li>";
+                                echo "<li><input placeholder='Doświadczenie' maxlength='100' value='{$experienceValues[0]}' type='text' name='experience[name][$i]'> (<input type='date' value='{$experienceValues[1]}' name='experience[dateFrom][$i]' > do <input type='date' class='dateToClass' value='{$experienceValues[2]}' name='experience[dateTo][$i]'> <label for='experience[dateTo][$i]'>teraz <input type='checkbox' class='data-now' name='experience[dateTo][$i]'></label>)</li>";
                             }
                             $i++;
                         }
                     }
                 ?>
                 </ul>
+                <!-- DATA: Education -->
                 <b>Edukacja:</b> <button id="addEducation">Dodaj edukacje</button>
                 <ul id="educationList">
                 <?php
@@ -166,10 +181,10 @@
                             $educationValues = explode("\\", $education);
                             if ($educationValues[2] == "now") {
                                 $now = date("Y-m-d");
-                                echo "<li><input placeholder='Edukacja' value='{$educationValues[0]}' type='text' name='edu[$j]'> (<input type='date' value='{$educationValues[1]}' name='eduDateFrom[$j]' > do <input type='date' name='eduDateTo[$j]' value='{$now}' class='dateToClass' disabled='disabled'> <label for='eduDateTo[$j]'>teraz <input type='checkbox' class='data-now' name='eduDateTo[$j]' checked></label>)</li>";
+                                echo "<li><input placeholder='Edukacja' maxlength='100' value='{$educationValues[0]}' type='text' name='education[name][$j]'> (<input type='date' value='{$educationValues[1]}' name='education[dateFrom][$j]' > do <input type='date' name='education[dateTo][$j]' value='{$now}' class='dateToClass' disabled='disabled'> <label for='education[dateTo][$j]'>teraz <input type='checkbox' class='data-now' name='education[dateTo][$j]' checked></label>)</li>";
                             }
                             else {
-                                echo "<li><input placeholder='Edukacja' value='{$educationValues[0]}' type='text' name='edu[$j]'> (<input type='date' value='{$educationValues[1]}' name='eduDateFrom[$j]' > do <input type='date' name='eduDateTo[$j]' value='{$educationValues[2]}' class='dateToClass'> <label for='eduDateTo[$j]'>teraz <input type='checkbox' class='data-now' name='eduDateTo[$j]'></label>)</li>";
+                                echo "<li><input placeholder='Edukacja' maxlength='100' value='{$educationValues[0]}' type='text' name='education[name][$j]'> (<input type='date' value='{$educationValues[1]}' name='education[dateFrom][$j]' > do <input type='date' name='education[dateTo][$j]' value='{$educationValues[2]}' class='dateToClass'> <label for='education[dateTo][$j]'>teraz <input type='checkbox' class='data-now' name='education[dateTo][$j]'></label>)</li>";
                             }
                             $j++;
                         }
@@ -183,6 +198,7 @@
                     <div style="content: ''; position: absolute;left: 29.5rem;top: 1rem;width: 1rem;height: 1rem;background: #d9e2da;"></div>
                     <div style="border-radius: 50%;content: '';position: absolute;left: 29.5rem;top: 0.5rem;width: 1.5rem;height: 1.5rem;background: #ebf0eb;"></div>
                 </span>
+                <!-- DATA: Languages -->
                 <b>Znajomość języków:</b> <button id="addLanguage">Dodaj język</button>
                 <ul id="languageList">
                 <?php
@@ -191,12 +207,13 @@
                         $k = 0;
                         foreach ($languageList as $language) {
                             $languageValues = explode('\\', $language);
-                            echo "<li><input placeholder='Język' value='{$languageValues[0]}' type='text' name='lan[$k]'> (<input placeholder='Poziom' value='{$languageValues[1]}' type='text' name='lanLevel[$k]' >)</li>";
+                            echo "<li><input placeholder='Język' maxlength='50' value='{$languageValues[0]}' type='text' name='language[name][$k]'> (<input placeholder='Poziom' maxlength='20' value='{$languageValues[1]}' type='text' name='language[level][$k]' >)</li>";
                             $k++;
                         }
                     }
                 ?>
                 </ul>
+                <!-- DATA: Abilities -->
                 <b>Umiejętności:</b> <button id="addSkill">Dodaj umiejętność</button>
                 <ul id="skillList">
                 <?php
@@ -204,12 +221,13 @@
                         $skillList = explode(";", $userData['abilities']);
                         $l = 0;
                         foreach ($skillList as $skill) {
-                            echo "<li><input placeholder='Umiejętność' value='$skill' type='text' name='skill[$l]'></li>";
+                            echo "<li><input placeholder='Umiejętność' maxlength='50' value='$skill' type='text' name='skill[$l]'></li>";
                             $l++;
                         }
                     }
                 ?>
                 </ul>
+                <!-- DATA: Interests -->
                 <b>Zainteresowania:</b> <button id="addInterest">Dodaj zainteresowanie</button>
                 <ul id="interestList">
                 <?php
@@ -217,7 +235,7 @@
                         $interestsList = explode(";", $userData['interests']);
                         $m = 0;
                         foreach ($interestsList as $interests) {
-                            echo "<li><input placeholder='Zainteresowanie' value='$interests' type='text' name='interests[$m]'></li>";
+                            echo "<li><input placeholder='Zainteresowanie' maxlength='50' value='$interests' type='text' name='interests[$m]'></li>";
                             $m++;
                         }
                     }
@@ -230,9 +248,11 @@
                     <div style="content: ''; position: absolute;left: 7.96rem;top: 1rem;width: 1rem;height: 1rem;background: #d9e2da;"></div>
                     <div style="border-radius: 50%;content: '';position: absolute;left: 7.96rem;top: 0.5rem;width: 1.5rem;height: 1.5rem;background: #ebf0eb;"></div>
                 </span>
-                <textarea style="resize: none" name="description" id="" cols="30" rows="10"><?php echo $userData['about_me'] ?></textarea>
+                <!-- DATA: About Me -->
+                <textarea maxlength="500" style="resize: none" name="description" id="" cols="30" rows="10"><?php echo $userData['about_me'] ?></textarea>
             </div>
             <div id="error-message"></div>
+            <!-- DATA: Save CV -->
             <button id="save">Zapisz CV</button>
         </form>
         <br>

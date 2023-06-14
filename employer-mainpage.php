@@ -32,7 +32,7 @@
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <h2>Imię Nazwisko</h2>
-                    <div>Doświadzczenie: brak</div>
+                    <div>Doświadczenie: brak</div>
                     <div>Umiejętności: znajomość C++</div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <h2>Imię Nazwisko</h2>
-                    <div>Doświadzczenie: brak</div>
+                    <div>Doświadczenie: brak</div>
                     <div>Umiejętności: znajomość C++</div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <h2>Imię Nazwisko</h2>
-                    <div>Doświadzczenie: brak</div>
+                    <div>Doświadczenie: brak</div>
                     <div>Umiejętności: znajomość C++</div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <h2>Imię Nazwisko</h2>
-                    <div>Doświadzczenie: brak</div>
+                    <div>Doświadczenie: brak</div>
                     <div>Umiejętności: znajomość C++</div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <h2>Imię Nazwisko</h2>
-                    <div>Doświadzczenie: brak</div>
+                    <div>Doświadczenie: brak</div>
                     <div>Umiejętności: znajomość C++</div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <h2>Imię Nazwisko</h2>
-                    <div>Doświadzczenie: brak</div>
+                    <div>Doświadczenie: brak</div>
                     <div>Umiejętności: znajomość C++</div>
                 </div>
             </div>
