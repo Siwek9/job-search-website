@@ -45,13 +45,26 @@ function cvShow($userData) {
             $toReturn .= "
             <div style='content: \"\"; position: absolute;left: 24.5rem;top: 1rem;width: 1rem;height: 1rem;background: #d9e2da;'></div>
                 <div style='border-radius: 50%;content: \"\";position: absolute;left: 24.5rem;top: 0.5rem;width: 1.5rem;height: 1.5rem;background: #ebf0eb;'></div>
-            </span>
-            <b>Doświadczenie Zawodowe:</b>
-            <ul>
-                <li>Specjalista Ds. Marketingu w PolandShop (2006-10 do 2012-12)</li>
-                <li>Specjalista Ds. Marketingu w PolandShop (2006-10 <b>do</b> 2012-12)</li>
-            </ul>
-            <b>Edukacja:</b>
+            </span>";
+        if (!is_null($userData['experience'])) {
+            $toReturn .= "<b>Doświadczenie Zawodowe:</b>
+            <ul>";
+            $experienceList = explode(";", $userData['experience']);
+            $i = 0;
+            foreach ($experienceList as $experience) {
+                $experienceValues = explode("\\", $experience);
+                if ($experienceValues[2] == "now") {
+                    // $now = date("Y-m-d");
+                    echo "<li>{$experienceValues[0]} ({$experienceValues[1]} <b>do</b> teraz)</li>";
+                }
+                else {
+                    echo "<li>{$experienceValues[0]} ({$experienceValues[1]} <b>do</b> {$experienceValues[2]})</li>";
+                }
+                $i++;
+            }
+            $toReturn .= "</ul>";
+        }
+            $toReturn .= "<b>Edukacja:</b>
             <ul>
                 <li>Elektryk Krosno (kierunek ping-pong) (2002-09 <b>do</b> 2005-06)</li>
             </ul>
