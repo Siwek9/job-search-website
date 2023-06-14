@@ -343,6 +343,11 @@ footer{
     font: 600 50px Poppins;
 }
 
+.cv-name input{
+    font-size: 50px;
+    border-radius: 200px;
+}
+
 #loginPass{
     font: 25px Poppins;
     margin-bottom: 2rem;
@@ -463,9 +468,13 @@ input, textarea, #fileLbl{
     font-size: 14px;
 }
 
-input[type="text"]:focus, input[type="email"]:focus,input[type="password"]:focus, input[type="tel"]:focus, input[type="number"]:focus{
+input[type="text"]:focus, input[type="email"]:focus,input[type="password"]:focus, input[type="tel"]:focus, input[type="number"]:focus, #phone:focus{
     outline: 2px solid #7e7c7c;
     font-size: 16px;
+}
+
+.cv-name input:focus{
+    font-size: 55px;
 }
 
 #flex2{

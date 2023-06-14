@@ -106,7 +106,7 @@
                 }
             ?>
             </div>
-            <div class="cv-name">
+            <div class="cv-name" style="margin: 1.7rem 0 2.2rem 0">
                 <!-- DATA: First Name and Last Name -->
                 <input type="text" placeholder="Imię i nazwisko*" maxlength="50" name="firstNameLastName" value="<?php echo $userData['first_name'] . " " . $userData['last_name']; ?>" id=""> 
             </div>
@@ -160,10 +160,10 @@
                             $experienceValues = explode("\\", $experience);
                             if ($experienceValues[2] == "now") {
                                 $now = date("Y-m-d");
-                                echo "<li><input placeholder='Doświadczenie' maxlength='100' value='{$experienceValues[0]}' type='text' name='experience[name][$i]'> (<input type='date' value='{$experienceValues[1]}' name='experience[dateFrom][$i]' > do <input type='date' class='dateToClass' value='{$now}' name='experience[dateTo][$i]' disabled='disabled'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='experience[dateTo][$i]' checked></label>)</li>";
+                                echo "<li id='exp${i}'><input placeholder='Doświadczenie' maxlength='100' value='{$experienceValues[0]}' type='text' name='experience[name][$i]'> (<input type='date' value='{$experienceValues[1]}' name='experience[dateFrom][$i]' > do <input type='date' class='dateToClass' value='{$now}' name='experience[dateTo][$i]' disabled='disabled'> <label for='expDateToNow[$i]'>teraz <input type='checkbox' class='data-now' name='experience[dateTo][$i]' checked></label>)<i class='fa-solid fa-trash fa-xl delExp' id='delExp${i}' style='color: rgb(238, 110, 110); margin-left: 1rem;'></i></li>";
                             }
                             else {
-                                echo "<li><input placeholder='Doświadczenie' maxlength='100' value='{$experienceValues[0]}' type='text' name='experience[name][$i]'> (<input type='date' value='{$experienceValues[1]}' name='experience[dateFrom][$i]' > do <input type='date' class='dateToClass' value='{$experienceValues[2]}' name='experience[dateTo][$i]'> <label for='experience[dateTo][$i]'>teraz <input type='checkbox' class='data-now' name='experience[dateTo][$i]'></label>)</li>";
+                                echo "<li id='exp${i}'><input placeholder='Doświadczenie' maxlength='100' value='{$experienceValues[0]}' type='text' name='experience[name][$i]'> (<input type='date' value='{$experienceValues[1]}' name='experience[dateFrom][$i]' > do <input type='date' class='dateToClass' value='{$experienceValues[2]}' name='experience[dateTo][$i]'> <label for='experience[dateTo][$i]'>teraz <input type='checkbox' class='data-now' name='experience[dateTo][$i]'></label>)<i class='fa-solid fa-trash fa-xl delExp' id='delExp${i}' style='color: rgb(238, 110, 110); margin-left: 1rem;'></i></li>";
                             }
                             $i++;
                         }
@@ -181,10 +181,10 @@
                             $educationValues = explode("\\", $education);
                             if ($educationValues[2] == "now") {
                                 $now = date("Y-m-d");
-                                echo "<li><input placeholder='Edukacja' maxlength='100' value='{$educationValues[0]}' type='text' name='education[name][$j]'> (<input type='date' value='{$educationValues[1]}' name='education[dateFrom][$j]' > do <input type='date' name='education[dateTo][$j]' value='{$now}' class='dateToClass' disabled='disabled'> <label for='education[dateTo][$j]'>teraz <input type='checkbox' class='data-now' name='education[dateTo][$j]' checked></label>)</li>";
+                                echo "<li id='edu${j}'><input placeholder='Edukacja' maxlength='100' value='{$educationValues[0]}' type='text' name='education[name][$j]'> (<input type='date' value='{$educationValues[1]}' name='education[dateFrom][$j]' > do <input type='date' name='education[dateTo][$j]' value='{$now}' class='dateToClass' disabled='disabled'> <label for='education[dateTo][$j]'>teraz <input type='checkbox' class='data-now' name='education[dateTo][$j]' checked></label>)<i class='fa-solid fa-trash fa-xl delEdu' id='delEdu${j}' style='color: rgb(238, 110, 110); margin-left: 1rem;'></i></li>";
                             }
                             else {
-                                echo "<li><input placeholder='Edukacja' maxlength='100' value='{$educationValues[0]}' type='text' name='education[name][$j]'> (<input type='date' value='{$educationValues[1]}' name='education[dateFrom][$j]' > do <input type='date' name='education[dateTo][$j]' value='{$educationValues[2]}' class='dateToClass'> <label for='education[dateTo][$j]'>teraz <input type='checkbox' class='data-now' name='education[dateTo][$j]'></label>)</li>";
+                                echo "<li id='edu${j}'><input placeholder='Edukacja' maxlength='100' value='{$educationValues[0]}' type='text' name='education[name][$j]'> (<input type='date' value='{$educationValues[1]}' name='education[dateFrom][$j]' > do <input type='date' name='education[dateTo][$j]' value='{$educationValues[2]}' class='dateToClass'> <label for='education[dateTo][$j]'>teraz <input type='checkbox' class='data-now' name='education[dateTo][$j]'></label>)<i class='fa-solid fa-trash fa-xl delEdu' id='delEdu${j}' style='color: rgb(238, 110, 110); margin-left: 1rem;'></i></li>";
                             }
                             $j++;
                         }
@@ -207,7 +207,7 @@
                         $k = 0;
                         foreach ($languageList as $language) {
                             $languageValues = explode('\\', $language);
-                            echo "<li><input placeholder='Język' maxlength='50' value='{$languageValues[0]}' type='text' name='language[name][$k]'> (<input placeholder='Poziom' maxlength='20' value='{$languageValues[1]}' type='text' name='language[level][$k]' >)</li>";
+                            echo "<li id='lan${k}'> <input placeholder='Język' maxlength='50' value='{$languageValues[0]}' type='text' name='language[name][$k]'> (<input placeholder='Poziom' maxlength='20' value='{$languageValues[1]}' type='text' name='language[level][$k]' >)<i class='fa-solid fa-trash fa-xl delLan' id='delLan${k}' style='color: rgb(238, 110, 110); margin-left: 1rem;'></i></li>";
                             $k++;
                         }
                     }
@@ -221,7 +221,7 @@
                         $skillList = explode(";", $userData['abilities']);
                         $l = 0;
                         foreach ($skillList as $skill) {
-                            echo "<li><input placeholder='Umiejętność' maxlength='50' value='$skill' type='text' name='skill[$l]'></li>";
+                            echo "<li id='skill${l}'><input placeholder='Umiejętność' maxlength='50' value='$skill' type='text' name='skill[$l]'><i class='fa-solid fa-trash fa-xl delSkill' id='delSkill${l}' style='color: rgb(238, 110, 110); margin-left: 1rem;'></i></li>";
                             $l++;
                         }
                     }
@@ -235,7 +235,7 @@
                         $interestsList = explode(";", $userData['interests']);
                         $m = 0;
                         foreach ($interestsList as $interests) {
-                            echo "<li><input placeholder='Zainteresowanie' maxlength='50' value='$interests' type='text' name='interests[$m]'></li>";
+                            echo "<li id='int${m}'><input placeholder='Zainteresowanie' maxlength='50' value='$interests' type='text' name='interests[$m]'><i class='fa-solid fa-trash fa-xl delInt' id='delInt${m}' style='color: rgb(238, 110, 110); margin-left: 1rem;'></i></li>";
                             $m++;
                         }
                     }

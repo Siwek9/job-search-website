@@ -3,6 +3,15 @@ let addEdu = document.querySelector("#addEducation");
 let addLan = document.querySelector("#addLanguage");
 let addSkill = document.querySelector("#addSkill");
 let addInt = document.querySelector("#addInterest");
+let fileInp = document.querySelector("#file");
+let fileLbl = document.querySelector("#fileLbl");
+
+let delExp, delEdu, delLan, delSkill, delInt;
+
+fileInp.addEventListener("change", function(){
+    fileLbl.innerHTML = "Wybrano plik: " + fileInp.files[0].name;
+});
+
 
 window.addEventListener("load", function() {
     i = document.querySelector("#experienceList").childElementCount; 
@@ -10,13 +19,20 @@ window.addEventListener("load", function() {
     k = document.querySelector("#languageList").childElementCount; 
     l = document.querySelector("#skillList").childElementCount; 
     m = document.querySelector("#interestList").childElementCount;
-    // console.log(i);
 });
+
+delExp = document.querySelectorAll(".delExp");
+    delExp.forEach(element => {
+        element.addEventListener("click", function(){
+            document.querySelector("#exp" + element.id.slice(-1)).remove();
+        });
+        
+    });
 
 let i = 0;
 addExp.addEventListener("click", function(e){
     e.preventDefault();
-    document.querySelector("#experienceList").innerHTML += `<li><input placeholder='Doświadczenie' maxlength="100" type='text' name='experience[name][${i}]'> (<input type='date' name='experience[dateFrom][${i}]' > do <input type='date' class='dateToClass' name='experience[dateTo][${i}]'> <label for='experience[dateTo][${i}]'>teraz <input type='checkbox' class='data-now' name='experience[dateTo][${i}]'></label>)</li>`;
+    document.querySelector("#experienceList").innerHTML += `<li id="exp${i}"><input placeholder='Doświadczenie' maxlength="100" type='text' name='experience[name][${i}]'> (<input type='date' name='experience[dateFrom][${i}]' > do <input type='date' class='dateToClass' name='experience[dateTo][${i}]'> <label for='experience[dateTo][${i}]'>teraz <input type='checkbox' class='data-now' name='experience[dateTo][${i}]'></label>)<i class="fa-solid fa-trash fa-xl delExp" id="delExp${i}" style='color: rgb(238, 110, 110); margin-left: 1rem;'></i></li>`;
     $(".data-now").off('click');
     $(".data-now").click(function() {
         if (this.checked) {
@@ -27,12 +43,27 @@ addExp.addEventListener("click", function(e){
         }
     });
     i++;
+    delExp = document.querySelectorAll(".delExp");
+    delExp.forEach(element => {
+        element.addEventListener("click", function(){
+            document.querySelector("#exp" + element.id.slice(-1)).remove();
+        });
+        
+    });
 });
+
+delEdu = document.querySelectorAll(".delEdu");
+    delEdu.forEach(element => {
+        element.addEventListener("click", function(){
+            document.querySelector("#edu" + element.id.slice(-1)).remove();
+        });
+        
+    });
 
 let j = 0;
 addEdu.addEventListener("click", function(e){
     e.preventDefault();
-    document.querySelector("#educationList").innerHTML += `<li><input placeholder='Edukacja' maxlength="100" type='text' name='education[name][${j}]'> (<input type='date' name='education[dateFrom][${j}]' > do <input type='date' name='education[dateTo][${j}]' class='dateToClass'> <label for='education[dateTo][${j}]'>teraz <input type='checkbox' class='data-now' name='education[dateTo][${j}]'></label>)</li>`;
+    document.querySelector("#educationList").innerHTML += `<li id="edu${j}"><input placeholder='Edukacja' maxlength="100" type='text' name='education[name][${j}]'> (<input type='date' name='education[dateFrom][${j}]' > do <input type='date' name='education[dateTo][${j}]' class='dateToClass'> <label for='education[dateTo][${j}]'>teraz <input type='checkbox' class='data-now' name='education[dateTo][${j}]'></label>)<i class="fa-solid fa-trash fa-xl delEdu" id="delEdu${j}" style='color: rgb(238, 110, 110); margin-left: 1rem;'></i></li>`;
     $(".data-now").off('click');
     $(".data-now").click(function() {
         if (this.checked) {
@@ -43,27 +74,79 @@ addEdu.addEventListener("click", function(e){
         }
     });
     j++;
+    delEdu = document.querySelectorAll(".delEdu");
+    delEdu.forEach(element => {
+        element.addEventListener("click", function(){
+            document.querySelector("#edu" + element.id.slice(-1)).remove();
+        });
+        
+    });
 });
+
+delLan = document.querySelectorAll(".delLan");
+    delLan.forEach(element => {
+        element.addEventListener("click", function(){
+            document.querySelector("#lan" + element.id.slice(-1)).remove();
+        });
+        
+    });
 
 let k = 0;
 addLan.addEventListener("click", function(e){
     e.preventDefault();
-    document.querySelector("#languageList").innerHTML += `<li><input placeholder='Język' maxlength="50" type='text' name='language[name][${k}]'> (<input placeholder='Poziom' maxlength="20" type='text' name='language[level][${k}]' >)</li>`;
+    document.querySelector("#languageList").innerHTML += `<li id="lan${k}"><input placeholder='Język' maxlength="50" type='text' name='language[name][${k}]'> (<input placeholder='Poziom' maxlength="20" type='text' name='language[level][${k}]'>)<i class="fa-solid fa-trash fa-xl delLan" id="delLan${k}" style='color: rgb(238, 110, 110); margin-left: 1rem;'></i></li>`;
     k++;
+    delLan = document.querySelectorAll(".delLan");
+    delLan.forEach(element => {
+        element.addEventListener("click", function(){
+            document.querySelector("#lan" + element.id.slice(-1)).remove();
+        });
+        
+    });
 });
+
+delSkill = document.querySelectorAll(".delSkill");
+    delSkill.forEach(element => {
+        element.addEventListener("click", function(){
+            document.querySelector("#skill" + element.id.slice(-1)).remove();
+        });
+        
+    });
 
 let l = 0;
 addSkill.addEventListener("click", function(e){
     e.preventDefault();
-    document.querySelector("#skillList").innerHTML += `<li><input placeholder='Umiejętność' maxlength="50" type='text' name='skill[${l}]'></li>`;
+    document.querySelector("#skillList").innerHTML += `<li id="skill${l}"><input placeholder='Umiejętność' maxlength="50" type='text' name='skill[${l}]'><i class="fa-solid fa-trash fa-xl delSkill" id="delSkill${i}" style='color: rgb(238, 110, 110); margin-left: 1rem;'></i></li>`;
     l++;
+    delSkill = document.querySelectorAll(".delSkill");
+    delSkill.forEach(element => {
+        element.addEventListener("click", function(){
+            document.querySelector("#skill" + element.id.slice(-1)).remove();
+        });
+        
+    });
 });
+
+delInt = document.querySelectorAll(".delInt");
+delInt.forEach(element => {
+        element.addEventListener("click", function(){
+            document.querySelector("#int" + element.id.slice(-1)).remove();
+        });
+        
+    });
 
 let m = 0;
 addInt.addEventListener("click", function(e){
     e.preventDefault();
-    document.querySelector("#interestList").innerHTML += `<li><input placeholder='Zainteresowanie' maxlength="50" type='text' name='interest[${m}]'></li>`;
+    document.querySelector("#interestList").innerHTML += `<li id="int${m}"><input placeholder='Zainteresowanie' maxlength="50" type='text' name='interest[${m}]'><i class="fa-solid fa-trash fa-xl delInt" id="delInt${m}" style='color: rgb(238, 110, 110); margin-left: 1rem;'></i></li>`;
     m++;
+    delInt = document.querySelectorAll(".delInt");
+    delInt.forEach(element => {
+        element.addEventListener("click", function(){
+            document.querySelector("#int" + element.id.slice(-1)).remove();
+        });
+        
+    });
 });
 
 $(document).ready(function() {
