@@ -150,8 +150,8 @@ addInt.addEventListener("click", function(e){
 });
 
 document.querySelector("#tryAgain").addEventListener("click", function(){
-        document.querySelector("#errorBack").opacity = 0;
-        document.querySelector("#errorBack").zIndex = -200;
+    document.querySelector("#errorBack").opacity = 0;
+    document.querySelector("#errorBack").zIndex = -200;
 });
 
 $(document).ready(function() {
