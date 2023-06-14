@@ -256,7 +256,7 @@
             <div id="errorBack">
                 <div id="error-message">
                     <div id="error">Błąd po stronie serwera </div>
-                    <button>Spróbuj ponownie</button>
+                    <button id="tryAgain">Spróbuj ponownie</button>
                 </div>
             </div>
             <div style="margin-top: 1rem;">* - informacje obowiązkowe</div>

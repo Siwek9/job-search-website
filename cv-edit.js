@@ -149,6 +149,11 @@ addInt.addEventListener("click", function(e){
     });
 });
 
+document.querySelector("#tryAgain").addEventListener("click", function(){
+        document.querySelector("#errorBack").opacity = 0;
+        document.querySelector("#errorBack").zIndex = -200;
+});
+
 $(document).ready(function() {
     $(".data-now").click(function() {
         if (this.checked) {
@@ -188,8 +193,8 @@ $(document).ready(function() {
                 }
                 catch(error) {
                     $("#error").text("Wystąpił nieoczekiwany błąd po stronie serwera.<br> Proszę spróbować jeszcze raz.");
-                    $(errorBack).css("opacity", 1)
-                    $(errorBack).css("z-index", 200)
+                    $("#errorBack").css("opacity", 1)
+                    $("#errorBack").css("z-index", 200)
                     return;
                 }
     
@@ -200,8 +205,8 @@ $(document).ready(function() {
                 else {
                     if (result.error.message == undefined) {
                         $("#error").text("Wystąpił nieoczekiwany błąd po stronie serwera.<br> Proszę spróbować jeszcze raz.");
-                        $(errorBack).css("opacity", 1)
-                        $(errorBack).css("z-index", 200)
+                        $("#errorBack").css("opacity", 1);
+                        $("#errorBack").css("z-index", 200);
                         return;
                     }
                     $("#error-message").text(result.error.message);
