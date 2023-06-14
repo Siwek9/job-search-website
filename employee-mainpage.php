@@ -117,11 +117,12 @@
         </div>
         <h2>Moje CV</h2>
         <?php 
-            require("server/cv-show.php");
+            require("server/show.php");
             if (!is_null($userData['first_name'])) {
                 echo cvShow($userData);
             }
         ?>
+        <a href='cv-edit.php' id='edit'>Edytuj dane</a>
         <br>
         <br>    
     </div>

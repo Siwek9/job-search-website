@@ -1,4 +1,78 @@
 <?php
+function offerShow($offerData, $companyPhoto) {
+    // session_start();
+    $accountType = $_SESSION['accountType'];
+
+    $toReturn = "
+    <div class='cv' style='width: 50rem;'>
+        <div class='job-photo'>
+            <img class='image' src='assets/images/company-logo/$companyPhoto' alt='' draggable='false'>
+        </div>
+        <div class='cv-name' >
+                {$offerData['job_position']}
+        </div>
+        <div class='job-info relative'>
+            <span class='title relative'>
+                Informacje
+                <div style='content: ''; position: absolute;left: 11.3rem;top: 1rem;width: 1rem;height: 1rem;background: #d9e2da;'></div>
+                <div style='border-radius: 50%;content: '';position: absolute;left: 11.3rem;top: 0.5rem;width: 1.5rem;height: 1.5rem;background: #ebf0eb;'></div>
+            </span>
+            
+            <b>Miejsce pracy: </b>{$offerData['job_place']}<br>
+            <b>Okres umowy: </b>{$offerData['job_years']} lata<br>
+            <b>Telefon kontaktowy: </b>{$offerData['job_contact_phone']}
+        </div>";
+    if (!is_null($offerData['job_abilities'] || !is_null($offerData['job_education']))) {
+        $toReturn .= "<div class='job-requirements relative'>
+        <span class='title'>
+            Wymagania
+            <div style='content: ''; position: absolute;left: 12.7rem;top: 1rem;width: 1rem;height: 1rem;background: #d9e2da;'></div>
+            <div style='border-radius: 50%;content: '';position: absolute;left: 12.7rem;top: 0.5rem;width: 1.5rem;height: 1.5rem;background: #ebf0eb;'></div>
+        </span>";
+        if (!is_null($offerData['job_abilities'])) {
+            $toReturn .= "<b>Umiejętności:</b>
+            <ul>";
+            $abilitiesList = explode(";", $offerData['job_abilities']);
+            foreach ($abilitiesList as $ability) {
+                $toReturn .= "<li>{$ability}</li>";
+            }
+            $toReturn .= "</ul>";
+        }
+        if (!is_null($offerData['job_education'])) {
+            $toReturn .= "<b>Edukacja:</b>
+            <ul>";
+            $educationList = explode(";", $offerData['job_education']);
+            foreach ($educationList as $education) {
+                $toReturn .= "<li>{$education}</li>";
+            }
+            $toReturn .= "</ul>";
+        }
+        $toReturn .= "</div>";
+    }
+    if (!is_null($offerData['job_description'])) {
+        $toReturn .= "
+            <div class='job-desc relative'>
+                <span class='title'>
+                    Opis
+                    <div style='content: ''; position: absolute;left: 5.6rem;top: 1rem;width: 1rem;height: 1rem;background: #d9e2da;'></div>
+                        <div style='border-radius: 50%;content: '';position: absolute;left: 5.6rem;top: 0.5rem;width: 1.5rem;height: 1.5rem;background: #ebf0eb;'></div>
+                </span>
+                {$offerData['job_description']}
+            </div>";
+    }
+    if ($accountType == "employer") {
+        $toReturn .= "<a href='offer-edit.php?offerID={$offerData['id']}' id='edit'>Edytuj dane</a>";
+    }
+    else if ($accountType == "employee") {
+        $toReturn .= "<a href='offer-edit.html' id='edit'>Wyślij zgłoszenie</a>";
+    }
+    $toReturn .= "
+        </div>
+    ";
+
+    return $toReturn;
+}
+
 function cvShow($userData) {
     $codes = require('world.php');
 
@@ -151,10 +225,11 @@ function cvShow($userData) {
             </div>";
     }
     $toReturn .= "
-            <a href='cv-edit.php' id='edit'>Edytuj dane</a>
         </div>
     ";
 
     return $toReturn;
 }
+
+
 ?>

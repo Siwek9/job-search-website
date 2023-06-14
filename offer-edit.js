@@ -3,6 +3,11 @@ let addSkill = document.querySelector("#addSkill");
 let fileInp = document.querySelector("#file");
 let fileLbl = document.querySelector("#fileLbl");
 
+window.addEventListener("load", function() {
+    i = document.querySelector("#educationList").childElementCount; 
+    j = document.querySelector("#skillList").childElementCount; 
+});
+
 delEdu = document.querySelectorAll(".delEdu");
     delEdu.forEach(element => {
         element.addEventListener("click", function(){

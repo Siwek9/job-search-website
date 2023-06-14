@@ -72,9 +72,9 @@
             echo json_encode(array('success' => false, 'error' => array('type' => 'wrong-data', 'message' => "Niepoprawne dane.")));
             die;
         }
-        $skill = convertArray($connect, $_POST['skill']);
-        if ($skill == "") $skill = 'NULL';
-        else $skill = "'$skill'";
+        $education = convertArray($connect, $_POST['education']);
+        if ($education == "") $education = 'NULL';
+        else $education = "'$education'";
     } // check if education is valid
 
     $desc = 'NULL';
