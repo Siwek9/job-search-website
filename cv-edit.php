@@ -251,9 +251,15 @@
                 <!-- DATA: About Me -->
                 <textarea maxlength="500" style="resize: none" name="description" id="" cols="30" rows="10"><?php echo $userData['about_me'] ?></textarea>
             </div>
-            <div id="error-message"></div>
             <!-- DATA: Save CV -->
-            <button id="save">Zapisz CV</button>
+            <button style="margin: 0;" id="save">Zapisz CV</button>
+            <div id="errorBack">
+                <div id="error-message">
+                    <div id="error">Błąd po stronie serwera </div>
+                    <button>Spróbuj ponownie</button>
+                </div>
+            </div>
+            <div style="margin-top: 1rem;">* - informacje obowiązkowe</div>
         </form>
         <br>
         <br>    

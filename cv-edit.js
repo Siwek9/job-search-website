@@ -187,17 +187,21 @@ $(document).ready(function() {
                     var result = JSON.parse(r);
                 }
                 catch(error) {
-                    $("#error-message").text("Wystąpił nieoczekiwany błąd po stronie serwera.<br> Proszę spróbować jeszcze raz.");
+                    $("#error").text("Wystąpił nieoczekiwany błąd po stronie serwera.<br> Proszę spróbować jeszcze raz.");
+                    $(errorBack).css("opacity", 1)
+                    $(errorBack).css("z-index", 200)
                     return;
                 }
     
                 if (result.success) {
                     finishCV(result.accountID);
-                    $("#error-message").text();
+                    $("#error").text();
                 }
                 else {
                     if (result.error.message == undefined) {
-                        $("#error-message").text("Wystąpił nieoczekiwany błąd.");
+                        $("#error").text("Wystąpił nieoczekiwany błąd po stronie serwera.<br> Proszę spróbować jeszcze raz.");
+                        $(errorBack).css("opacity", 1)
+                        $(errorBack).css("z-index", 200)
                         return;
                     }
                     $("#error-message").text(result.error.message);
