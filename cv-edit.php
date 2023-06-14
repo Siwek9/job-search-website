@@ -141,7 +141,11 @@
                     iti.setNumber("<?php echo $userData['phone_number'] ?>");
                   </script>
                 <!-- DATA: Photo -->
-                <b>Zdjęcie</b> <input type="file" name="photo" id="file" accept=".png,.jpg,.jpeg"> <label for="file" id="fileLbl">Dodaj zdjęcie</label>
+                <?php
+                    if($userData['photo_name'] != "") echo "<b>Zdjęcie</b> <input type=\"file\" name=\"photo\" id=\"file\" accept=\".png,.jpg,.jpeg\"> <label for=\"file\" id=\"fileLbl\">Aktualne zdjęcie: {$userData['photo_name']}</label>";
+                    else echo "<b>Zdjęcie</b> <input type=\"file\" name=\"photo\" id=\"file\" accept=\".png,.jpg,.jpeg\"> <label for=\"file\" id=\"fileLbl\">Dodaj zdjęcie</label>";
+                ?>
+                
             </div>
             <div class="cv-job-experience-education relative">
                 <span class="title">
