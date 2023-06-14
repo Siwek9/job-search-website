@@ -120,7 +120,7 @@
                 <!-- DATA: Date Birth -->
                 <b>Data urodzenia*: </b> <input type="date" name="dateOfBirth" value="<?php echo $userData['birth_date']; ?>" id=""> <br>
                 <!-- DATA: E-mail -->
-                <b>E-mail*:</b> <input placeholder="E-Mail" type="email" maxlength="50" name="email" value="<?php echo $userData['contact_email']; ?>" id=""> <br> 
+                <b>E-mail*:</b> <input style="margin-bottom: 1.6rem" placeholder="E-Mail" type="email" maxlength="50" name="email" value="<?php echo $userData['contact_email']; ?>" id=""> <br> 
                 <!-- DATA: Nationality -->
                 <b>Narodowość*:</b> <input type="text" name="nationality" id="country"> <br> <br>
                 <script>
