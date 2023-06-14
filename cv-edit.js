@@ -150,7 +150,6 @@ addInt.addEventListener("click", function(e){
 });
 
 document.querySelector("#tryAgain").addEventListener("click", function(e){
-    console.log("Siema");
     $("#errorBack").css("opacity", 0);
     $("#errorBack").css("z-index", -200);
 });
@@ -200,7 +199,7 @@ $(document).ready(function() {
                 }
     
                 if (result.success) {
-                    finishCV(result.accountID);
+                    finishCV();
                     $("#error").text();
                 }
                 else {

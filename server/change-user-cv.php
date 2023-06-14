@@ -208,7 +208,7 @@
         }
         else {
             $connect->query("ROLLBACK");
-            echo "jol";
+            // echo "jol";
             echo json_encode(array('success' => false, 'error' => array('type' => 'time-out', 'message' => "Connection Timed Out. Sprawdź połączenie internetowe.")));
             die;
         }

@@ -6,7 +6,7 @@
         die;
     }
     
-    if ($_SESSION['accountType'] != 'employee' && $_SESSION['accountType'] != 'employer') {
+    if ($_SESSION['accountType'] != 'employee') {
         header("Location:index.php");
         die;
     }
@@ -118,11 +118,11 @@
                 </span>
 
                 <!-- DATA: Date Birth -->
-                <b>Data urodzenia*: </b> <input type="date" name="dateOfBirth" value="<?php echo $userData['birth_date']; ?>" id=""> <br>
+                <b>Data urodzenia*: </b><input type="date" name="dateOfBirth" value="<?php echo $userData['birth_date']; ?>" id=""><br>
                 <!-- DATA: E-mail -->
-                <b>E-mail*:</b> <input style="margin-bottom: 1.6rem" placeholder="E-Mail" type="email" maxlength="50" name="email" value="<?php echo $userData['contact_email']; ?>" id=""> <br> 
+                <b>E-mail*: </b><input style="margin-bottom: 1.6rem" placeholder="E-Mail" type="email" maxlength="50" name="email" value="<?php echo $userData['contact_email']; ?>" id=""><br> 
                 <!-- DATA: Nationality -->
-                <b>Narodowość*:</b> <input type="text" name="nationality" id="country"> <br> <br>
+                <b>Narodowość*: </b><input type="text" name="nationality" id="country"><br><br>
                 <script>
                     $("#country").countrySelect({
                         defaultCountry: "<?php echo $userData['nationality'] ?>",
@@ -137,9 +137,9 @@
                         utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
                         preferredCountries: ["pl", "gb", "us", "ua", "de"]
                     });
-                    var iti = intlTelInput(phoneInput);``
+                    var iti = intlTelInput(phoneInput);
                     iti.setNumber("<?php echo $userData['phone_number'] ?>");
-                  </script>
+                </script>
                 <!-- DATA: Photo -->
                 <?php
                     if($userData['photo_name'] != "") echo "<b>Zdjęcie</b> <input type='file' name='photo' id='file' accept='.png,.jpg,.jpeg'> <label for='file' id='fileLbl'>Aktualne zdjęcie: {$userData['photo_name']}</label>";
@@ -256,7 +256,7 @@
                 <textarea maxlength="500" style="resize: none" name="description" id="" cols="30" rows="10"><?php echo $userData['about_me'] ?></textarea>
             </div>
             <!-- DATA: Save CV -->
-            <button style="margin: 0;" id="save">Zapisz CV</button>
+            <button type="submit" style="margin: 0;" id="save">Zapisz CV</button>
             <div id="errorBack">
                 <div id="error-message">
                     <div id="error">Błąd po stronie serwera </div>

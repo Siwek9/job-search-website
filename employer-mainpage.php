@@ -146,7 +146,7 @@
     </div>
     <div id="jobOffers">
         <h1>Moje oferty pracy</h1>
-        <button id="addOffer">Dodaj ofertę pracy</button>
+        <a href="offer-edit.php"><button id="addOffer">Dodaj ofertę pracy</button></a>
 
         <div id="wrapper">
             <div class="cv" style="width: 50rem;">
