@@ -220,7 +220,7 @@
     die;
 
     function convertArray($connect, $arrayWithData) {
-        $data = $arrayWithData;
+        $data = array_values($arrayWithData);
 
         $linesArray = array();
         for ($i=0; $i < count($data); $i++) {
@@ -242,8 +242,8 @@
     }
 
     function convertLanguage($connect, $arrayWithData) {
-        $name = $arrayWithData['name'];
-        $level = $arrayWithData['level'];
+        $name = array_values($arrayWithData['name']);
+        $level = array_values($arrayWithData['level']);
 
         $linesArray = array();
         for ($i=0; $i < count($name); $i++) {
@@ -277,9 +277,9 @@
     }
 
     function convertExperienceOrEducationToString($connect, $arrayWithData) {
-        $name = $arrayWithData['name'];
-        $dateFrom = $arrayWithData['dateFrom'];
-        $dateTo = $arrayWithData['dateTo'];
+        $name = array_values($arrayWithData['name']);
+        $dateFrom = array_values($arrayWithData['dateFrom']);
+        $dateTo = array_values($arrayWithData['dateTo']);
 
         $linesArray = array();
         for ($i=0; $i < count($name); $i++) {

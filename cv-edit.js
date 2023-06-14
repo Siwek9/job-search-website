@@ -149,9 +149,10 @@ addInt.addEventListener("click", function(e){
     });
 });
 
-document.querySelector("#tryAgain").addEventListener("click", function(){
-    document.querySelector("#errorBack").opacity = 0;
-    document.querySelector("#errorBack").zIndex = -200;
+document.querySelector("#tryAgain").addEventListener("click", function(e){
+    console.log("Siema");
+    $("#errorBack").css("opacity", 0);
+    $("#errorBack").css("z-index", -200);
 });
 
 $(document).ready(function() {
@@ -209,7 +210,12 @@ $(document).ready(function() {
                         $("#errorBack").css("z-index", 200);
                         return;
                     }
-                    $("#error-message").text(result.error.message);
+                    else {
+                        $("#error").text(result.error.message);
+                        $("#errorBack").css("opacity", 1);
+                        $("#errorBack").css("z-index", 200);
+                        return;
+                    }
                 }
             }
         });

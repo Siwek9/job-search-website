@@ -142,8 +142,8 @@
                   </script>
                 <!-- DATA: Photo -->
                 <?php
-                    if($userData['photo_name'] != "") echo "<b>Zdjęcie</b> <input type=\"file\" name=\"photo\" id=\"file\" accept=\".png,.jpg,.jpeg\"> <label for=\"file\" id=\"fileLbl\">Aktualne zdjęcie: {$userData['photo_name']}</label>";
-                    else echo "<b>Zdjęcie</b> <input type=\"file\" name=\"photo\" id=\"file\" accept=\".png,.jpg,.jpeg\"> <label for=\"file\" id=\"fileLbl\">Dodaj zdjęcie</label>";
+                    if($userData['photo_name'] != "") echo "<b>Zdjęcie</b> <input type='file' name='photo' id='file' accept='.png,.jpg,.jpeg'> <label for='file' id='fileLbl'>Aktualne zdjęcie: {$userData['photo_name']}</label>";
+                    else echo "<b>Zdjęcie</b> <input type='file' name='photo' id='file' accept='.png,.jpg,.jpeg'> <label for='file' id='fileLbl'>Dodaj zdjęcie</label>";
                 ?>
                 
             </div>
@@ -260,7 +260,7 @@
             <div id="errorBack">
                 <div id="error-message">
                     <div id="error">Błąd po stronie serwera </div>
-                    <button id="tryAgain">Spróbuj ponownie</button>
+                    <button type="button" id="tryAgain">Spróbuj ponownie</button>
                 </div>
             </div>
             <div style="margin-top: 1rem;">* - informacje obowiązkowe</div>
