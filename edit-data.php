@@ -18,15 +18,22 @@
         <div id="loginPass">
             <div id="firmData">
                 <img src="assets/images/company-logo/56.png" alt="">
-                <b>Właściciel: </b> <span><input style="width: 20rem" placeholder="Właściciel" type="text" name="login" id=""></span>
-                <b>Nazwa firmy: </b> <span><input style="width: 20rem" placeholder="Właściciel" type="text" name="login" id=""></span>
+                <b>Właściciel*: </b> <span><input style="width: 20rem" placeholder="Właściciel" type="text" name="login" id=""></span>
+                <b>Nazwa firmy*: </b> <span><input style="width: 20rem" placeholder="Właściciel" type="text" name="login" id=""></span>
                 <b>Adres E-Mail: </b> <span><input placeholder="Email" type="email" name="email" id=""></span>
-                <b>Adres: </b> <span><input style="width: 20rem" placeholder="Właściciel" type="text" name="login" id=""></span>
+                <b>Adres*: </b> <span><input style="width: 20rem" placeholder="Właściciel" type="text" name="login" id=""></span>
                 <b>Zdjęcie</b> <input type='file' name='photo' id='file' accept='.png,.jpg,.jpeg'> <span><label for='file' id='fileLbl'>Aktualne zdjęcie: </label></span>
                 <b>Opis: </b> <span><textarea maxlength="500" style="resize: none" name="description" id="" cols="30" rows="10"></textarea></span> 
-                <div style="display:flex; flex-direction: row-reverse">
+                <div style="display:flex; justify-content: center">
                     <a href='edit-data.php' id='edit' style="width: 8rem; margin-right: 1rem">Zapisz</a>
                 </div>
+                <div style="margin-top: 1rem; text-align:center">* - informacje obowiązkowe</div>
+                <div id="errorBack">
+                <div id="error-message">
+                    <div id="error">Błąd po stronie serwera </div>
+                    <button type="button" id="tryAgain">Spróbuj ponownie</button>
+                </div>
+            </div>
             </div>
         </div>
     </div>
