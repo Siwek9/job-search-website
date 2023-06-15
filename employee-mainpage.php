@@ -57,15 +57,15 @@
     <div id="businesses">
         <div id="imageTrack" data-mouse-down-at="0" data-prev-percentage="0">
             <?php
-                $result = $connect->query("SELECT user_employers.company_name, user_employers.company_address, user_employers.company_logo, job_offers_number.offers_number FROM user_employers JOIN (SELECT job_offers_number.company_id, COUNT(*) AS offers_number FROM job_offers AS job_offers_number GROUP BY job_offers_number.company_id) AS job_offers_number ON job_offers_number.company_id = (SELECT accounts.id FROM accounts WHERE accounts.id_user_data = user_employers.id)");
+                $result = $connect->query("SELECT user_employers.id, user_employers.company_name, user_employers.company_address, user_employers.company_logo, job_offers_number.offers_number FROM user_employers JOIN (SELECT job_offers_number.company_id, COUNT(*) AS offers_number FROM job_offers AS job_offers_number GROUP BY job_offers_number.company_id) AS job_offers_number ON job_offers_number.company_id = (SELECT accounts.id FROM accounts WHERE accounts.id_user_data = user_employers.id)");
                 if ($result) {
                     while($row = $result->fetch_assoc()) {
                         echo "<div class='relative'>";
                         if (!is_null($row['company_logo'])) {
-                            echo "<img class='image' src='assets/images/company-logo/{$row['company_logo']}' alt='' draggable='false'>";
+                            echo "<img id='{$row['id']}' class='image' src='assets/images/company-logo/{$row['company_logo']}' alt='' draggable='false'>";
                         }
                         else {
-                            echo "<img class='image' alt='' draggable='false'>";
+                            echo "<img id='{$row['id']}' class='image' alt='' draggable='false'>";
                         }
                         echo "<div class='info'>";
                         if (!is_null($row['company_name'])){
@@ -92,7 +92,6 @@
                 }
 
             ?>
-            <!-- Zrób tak ze ten div jest dla kazdego obrazka i ze sie wyswietla ładnie nad nim  -->
         </div>
         </div>
     </div>

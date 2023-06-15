@@ -1,5 +1,6 @@
 // let mainWindow = document.querySelector("#businesses");
 let track = document.querySelector("#imageTrack");
+let cards = document.querySelectorAll(".image");
 
 window.onmousedown = e => {
     track.dataset.mouseDownAt = e.clientX;
@@ -33,3 +34,10 @@ window.onmousemove = e => {
 
     }
 }
+
+cards.forEach(element=>{
+    element.addEventListener("click", function(){
+        let link = "mainpage.html?firm=" + element.id;
+        window.open(link, "_self").focus();
+    })
+});

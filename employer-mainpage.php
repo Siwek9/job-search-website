@@ -31,7 +31,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/styles/start_page.css">
-    <title>Document</title>
+    <title>Moja Firma</title>
 </head>
 <body>
     <div style="<?php 
@@ -166,13 +166,28 @@
                     }
                 }
             ?>
-    </div>
+        </div>
     <div id="myData" style="height: auto;">
+        <h1>Dane mojej firmy</h1>
+        <div id="loginPass">
+            <div id="firmData">
+                <img src="assets/images/company-logo/56.png" alt="">
+                <b>Właściciel: </b> <span>Gienek Bocian</span>
+                <b>Nazwa firmy: </b> <span>Bocian i Spółka</span>
+                <b>Adres E-Mail: </b> <span>bocian@aa.com</span>
+                <b>Adres: </b> <span>Zadupie ul.Gdzieś w lesie</span>
+                <b>Opis: </b> <span>Specjalizujemy się w: tak naprawdę to nie wiadomo co robimy</span> 
+                <div style="display:flex; flex-direction: row-reverse">
+                    <a href='edit-data.php' id='edit' style="width: 8rem; margin-right: 1rem">Edytuj dane</a>
+                </div>
+            </div>
+        </div>
         <h1>Dane mojego konta</h1>
         <div id="loginPass">
             <b>Login: </b> login <br>
             <b>Adres E-Mail: </b> aaa@aaa.com <br>
         </div>
+        
     </div>
 </div>
 </body>

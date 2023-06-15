@@ -71,8 +71,8 @@
                 }
             ?>
             </div>
-            <div class="cv-name" >
-                <input type="text" maxlength="100" name="jobName" placeholder="Nazwa stanowiska*" value="<?php 
+            <div class="cv-name" style="margin: 1.7rem 0 2.2rem 12rem">
+                <input style=" width: 80%" type="text" maxlength="100" name="jobName" placeholder="Nazwa stanowiska*" value="<?php 
                     if (isset($offerData['job_position'])) {
                         echo $offerData['job_position'];
                     }
