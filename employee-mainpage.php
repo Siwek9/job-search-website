@@ -36,9 +36,6 @@
 </head>
 <body>
     <!-- TODO: pop-up ze jak sie nie zrobiło cv to sie odpala i cie prosi o zrobienie -->
-    <?php
-        
-    ?>
     <div style="<?php 
         if (is_null($userData['first_name'])) {
             echo "display: block";
@@ -59,48 +56,43 @@
     
     <div id="businesses">
         <div id="imageTrack" data-mouse-down-at="0" data-prev-percentage="0">
-            <div class="relative">
-                <img class="image" src="assets/images/company-logo/Januszex-1.png" alt="" draggable="false">
-                <div class="info">
-                    Januszex<br>Firma IT<br>230 stanowisk <br>
-                </div>
-            </div>
+            <?php
+                $result = $connect->query("SELECT user_employers.company_name, user_employers.company_address, user_employers.company_logo, job_offers_number.offers_number FROM user_employers JOIN (SELECT job_offers_number.company_id, COUNT(*) AS offers_number FROM job_offers AS job_offers_number GROUP BY job_offers_number.company_id) AS job_offers_number ON job_offers_number.company_id = (SELECT accounts.id FROM accounts WHERE accounts.id_user_data = user_employers.id)");
+                if ($result) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<div class='relative'>";
+                        if (!is_null($row['company_logo'])) {
+                            echo "<img class='image' src='assets/images/company-logo/{$row['company_logo']}' alt='' draggable='false'>";
+                        }
+                        else {
+                            echo "<img class='image' alt='' draggable='false'>";
+                        }
+                        echo "<div class='info'>";
+                        if (!is_null($row['company_name'])){
+                            echo $row['company_name'] . "<br>";
+                        }
+                        else {
+                            echo "Nieznane" . "<br>";
+                        }
+                        if (!is_null($row['company_address'])){
+                            echo $row['company_address'] . "<br>";
+                        }
+                        else {
+                            echo "Nieznane" . "<br>";
+                        }
+                        if (!is_null($row['offers_number'])){
+                            echo $row['offers_number'] . "stanowisk<br>";
+                        }
+                        else {
+                            echo "0 stanowisk" . "<br>";
+                        }
+                        echo "</div>
+                        </div>";
+                    }
+                }
+
+            ?>
             <!-- Zrób tak ze ten div jest dla kazdego obrazka i ze sie wyswietla ładnie nad nim  -->
-            <div class="relative">
-                <img class="image" src="assets/images/company-logo/PolandShop-2.png" alt="" draggable="false">
-                <div class="info">
-                    PolandShop<br>Sklep Spożywczy<br>170 stanowisk
-                </div>
-            </div>
-            <div class="relative">
-                <img class="image" src="assets/images/company-logo/Pieronka-3.png" alt="" draggable="false">
-                <div class="info">
-                    Pieronka<br>Sklep Spożywczy<br>170 stanowisk
-                </div>
-            </div>
-            <div class="relative">
-                <img class="image" src="assets/images/company-logo/Tani_Market-4.png" alt="" draggable="false">
-                <div class="info">
-                    Tani Market<br>Sklep spożywczy<br>20 stanowisk
-                </div>
-            </div>
-            <div class="relative">
-                <img class="image" src="assets/images/company-logo/Dobry_Sklep-5.png" alt="" draggable="false">
-                <div class="info">
-                    Dobry Sklep<br>Sklep z odzieżą<br>200 stanowisk
-                </div>
-            </div>
-            <div class="relative">
-                <img class="image" src="assets/images/company-logo/FajnaFirma-6.png" alt="" draggable="false">
-                <div class="info">
-                    Gamrat<br>Przetwórstwo tworzyw sztucznych<br>1 stanowisko
-                </div>
-            </div>
-            <div class="relative">
-                <img class="image" src="assets/images/company-logo/DobryWęgiel-7.png" alt="" draggable="false">
-                <div class="info">
-                    Dobry Węgiel<br>Skup zwierząt<br>110 stanowisk
-            </div>
         </div>
         </div>
     </div>

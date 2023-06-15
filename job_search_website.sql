@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 14 Cze 2023, 12:09
--- Wersja serwera: 10.4.24-MariaDB
--- Wersja PHP: 8.1.6
+-- Czas generowania: 15 Cze 2023, 07:55
+-- Wersja serwera: 10.4.27-MariaDB
+-- Wersja PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,15 +31,14 @@ USE `job_search_website`;
 --
 
 DROP TABLE IF EXISTS `accounts`;
-CREATE TABLE IF NOT EXISTS `accounts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `accounts` (
+  `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `account_type` enum('employee','employer') NOT NULL DEFAULT 'employee',
-  `id_user_data` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4;
+  `id_user_data` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Zrzut danych tabeli `accounts`
@@ -47,7 +46,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 
 INSERT INTO `accounts` (`id`, `name`, `email`, `password`, `account_type`, `id_user_data`) VALUES
 (55, 'Siwek9', 'slawomir.s@poczta.onet.pl', '8ef745b22baa29dda8d93f801787397d842fb9afcc6ad9ea2f84258631279e70', 'employee', 19),
-(56, 'Siwek10', 'siwek10@siwek10.com', '8ef745b22baa29dda8d93f801787397d842fb9afcc6ad9ea2f84258631279e70', 'employer', 1);
+(56, 'Siwek10', 'siwek10@siwek10.com', '8ef745b22baa29dda8d93f801787397d842fb9afcc6ad9ea2f84258631279e70', 'employer', 2),
+(57, 'Siwek11', 'siwek11@siwek11.com', '8ef745b22baa29dda8d93f801787397d842fb9afcc6ad9ea2f84258631279e70', 'employer', 3);
 
 --
 -- Wyzwalacze `accounts`
@@ -70,29 +70,13 @@ DELIMITER ;
 --
 
 DROP TABLE IF EXISTS `account_activation`;
-CREATE TABLE IF NOT EXISTS `account_activation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `account_activation` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `activation_code` varchar(255) NOT NULL,
   `expiration_time` datetime NOT NULL,
-  `mail_sended` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `job-offers`
---
-
-DROP TABLE IF EXISTS `job-offers`;
-CREATE TABLE IF NOT EXISTS `job-offers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `job_position` varchar(100) NOT NULL,
-  `job_description` text NOT NULL,
-  `company_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `mail_sended` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -101,13 +85,40 @@ CREATE TABLE IF NOT EXISTS `job-offers` (
 --
 
 DROP TABLE IF EXISTS `job_application`;
-CREATE TABLE IF NOT EXISTS `job_application` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `job_application` (
+  `id` int(11) NOT NULL,
   `job_offer_id` int(11) NOT NULL,
   `job_candidate_id` int(11) NOT NULL,
-  `status` enum('sended','approved') NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `status` enum('sended','approved') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `job_offers`
+--
+
+DROP TABLE IF EXISTS `job_offers`;
+CREATE TABLE `job_offers` (
+  `id` int(11) NOT NULL,
+  `job_position` varchar(100) NOT NULL,
+  `job_place` varchar(50) NOT NULL,
+  `job_years` int(11) NOT NULL,
+  `job_contact_phone` varchar(15) NOT NULL,
+  `job_abilities` text DEFAULT NULL,
+  `job_education` text DEFAULT NULL,
+  `job_description` text DEFAULT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Zrzut danych tabeli `job_offers`
+--
+
+INSERT INTO `job_offers` (`id`, `job_position`, `job_place`, `job_years`, `job_contact_phone`, `job_abilities`, `job_education`, `job_description`, `company_id`) VALUES
+(1, 'Operator Koparki', 'Jasło', 2, '+48123456789', 'granie w ping ponga;assembler', 'granie na nerwach', 'Przyjemna prosta praca.', 56),
+(2, 'Groźny woźny', 'Elektryk Krosno', 20, '+48242424242', 'bicie miotłą', NULL, NULL, 56),
+(3, 'Programista PHP', 'Elektryk Krosno', 5, '+48222222222', 'programista php', 'programista php', 'programista php', 57);
 
 -- --------------------------------------------------------
 
@@ -116,8 +127,8 @@ CREATE TABLE IF NOT EXISTS `job_application` (
 --
 
 DROP TABLE IF EXISTS `user_employees`;
-CREATE TABLE IF NOT EXISTS `user_employees` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user_employees` (
+  `id` int(11) NOT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
   `photo_name` varchar(255) DEFAULT NULL,
@@ -130,16 +141,15 @@ CREATE TABLE IF NOT EXISTS `user_employees` (
   `education` text DEFAULT NULL,
   `abilities` text DEFAULT NULL,
   `language_abilities` text DEFAULT NULL,
-  `interests` text DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+  `interests` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Zrzut danych tabeli `user_employees`
 --
 
 INSERT INTO `user_employees` (`id`, `first_name`, `last_name`, `photo_name`, `about_me`, `nationality`, `birth_date`, `contact_email`, `phone_number`, `experience`, `education`, `abilities`, `language_abilities`, `interests`) VALUES
-(19, 'Lolek', 'Lolowski', '55.png', 'No jest wszystko w porządku,jest dobrze,dobrze robią,dobrze wszystko jest w porządku.Jest git pozdrawiam całą Legnice,dobrych chłopak&oacute;w i niech sie to trzyma.Dobry przekaz leci.', 'pl', '1988-06-23', 'slawomir.s@poczta.onet.pl', '+48420421422', 'praca w elektryku\\2008-04-13\\2012-12-20;programista w NASA\\2012-12-21\\2020-06-03;nauka c++ w elektryku\\2020-06-04\\now', 'elektryk krosno (kierunek ping-pong)\\2004-09-01\\2007-06-23', 'granie na nerwach;ping-pong;assembler', 'Angielski\\B2;Niemiecki\\C2', 'chodzenie do elektryka;zaba w elektryku;elektryk krosno');
+(19, 'Lolek', 'Lolowski', '55.png', 'No jest wszystko w porządku,jest dobrze,dobrze robią,dobrze wszystko jest w porządku.Jest git pozdrawiam całą Legnice,dobrych chłopak&oacute;w i niech sie to trzyma.Dobry przekaz leci.', 'pl', '1988-06-23', 'slawomir.s@poczta.onet.pl', '+48420421422', 'nie wiem\\2023-06-09\\', 'elektryk krosno (kierunek ping-pong)\\2004-09-01\\2007-06-23;gdzies napewno\\2007-09-01\\now', 'ping-pong;assembler;akwarium umie', 'Angielski\\B2;Niemiecki\\C2;Hiszpański\\C1', 'zaba w elektryku;elektryk krosno');
 
 -- --------------------------------------------------------
 
@@ -148,25 +158,105 @@ INSERT INTO `user_employees` (`id`, `first_name`, `last_name`, `photo_name`, `ab
 --
 
 DROP TABLE IF EXISTS `user_employers`;
-CREATE TABLE IF NOT EXISTS `user_employers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `contact_mail` varchar(255) NOT NULL,
-  `phone_number` varchar(15) NOT NULL,
-  `company_name` varchar(100) NOT NULL,
+CREATE TABLE `user_employers` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `contact_mail` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(15) DEFAULT NULL,
+  `company_name` varchar(100) DEFAULT NULL,
   `company_description` text DEFAULT NULL,
   `company_logo` varchar(255) DEFAULT NULL,
-  `company_address` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  `company_address` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Zrzut danych tabeli `user_employers`
 --
 
 INSERT INTO `user_employers` (`id`, `first_name`, `last_name`, `contact_mail`, `phone_number`, `company_name`, `company_description`, `company_logo`, `company_address`) VALUES
-(1, '', '', '', '', '', NULL, NULL, NULL);
+(2, 'Trollarz', 'Wielki', 'siwek10.sluzbowy@siwek10.com', '+48101010101', 'Fabryka Mebli', 'Firma bardzo dobra prosimy przyjmiemy każdego kto ma dwie rece i nogi (nie musi)', '56.png', 'Polska, Krosno, ul. Jana Pawła II 38-400'),
+(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+--
+-- Indeksy dla zrzutów tabel
+--
+
+--
+-- Indeksy dla tabeli `accounts`
+--
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `account_activation`
+--
+ALTER TABLE `account_activation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `job_application`
+--
+ALTER TABLE `job_application`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `job_offers`
+--
+ALTER TABLE `job_offers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `user_employees`
+--
+ALTER TABLE `user_employees`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `user_employers`
+--
+ALTER TABLE `user_employers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT dla zrzuconych tabel
+--
+
+--
+-- AUTO_INCREMENT dla tabeli `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- AUTO_INCREMENT dla tabeli `account_activation`
+--
+ALTER TABLE `account_activation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+
+--
+-- AUTO_INCREMENT dla tabeli `job_application`
+--
+ALTER TABLE `job_application`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `job_offers`
+--
+ALTER TABLE `job_offers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT dla tabeli `user_employees`
+--
+ALTER TABLE `user_employees`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT dla tabeli `user_employers`
+--
+ALTER TABLE `user_employers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 DELIMITER $$
 --

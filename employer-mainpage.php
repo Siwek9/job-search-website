@@ -34,6 +34,14 @@
     <title>Document</title>
 </head>
 <body>
+    <div style="<?php 
+        if (is_null($userData['first_name'])) {
+            echo "display: block";
+        }
+        else {
+            echo "display: none";
+        }
+    ?>" >Skompletuj swoje CV, żeby móc wysyłać swoje zgłoszenia o pracę! <a href="cv-edit.php">Napisz CV</a></div>
     <nav>
         <div id="logo">JobSE <span>Job finding made easy</span></div>
         <div id="links">
