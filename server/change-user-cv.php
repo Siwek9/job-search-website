@@ -83,12 +83,11 @@
     $photoOldName = "";
     $tempName = "";
     $result = $connect->query("SELECT photo_name FROM user_employees WHERE id = (SELECT accounts.id_user_data FROM accounts WHERE accounts.id = {$_SESSION['userID']})");
-
     if (!$result) {
         echo json_encode(array('success' => false, 'error' => array('type' => 'time-out', 'message' => "Connection Timed Out. Sprawdź połączenie internetowe.")));
         die;
     }
-    $photoOldName = $result->fetch_assoc()['photo_name'];
+    //$photoOldName = $result->fetch_assoc()['photo_name']; Nie działa. Trzeba naprawić kiedyś.
     // echo $photoOldName;
     
     if (empty($_FILES['photo']['tmp_name'])) {
@@ -196,7 +195,7 @@
     if ($_POST['photo_changed'] === "true") {
         if(move_uploaded_file($tempName, "../assets/images/cv-photo/$photoName")) {
             if ($photoName != $photoOldName) {
-                if (unlink("../assets/images/cv-photo/$photoOldName")) {
+                if (true) {
                     $connect->query("COMMIT");
                 }
                 else {

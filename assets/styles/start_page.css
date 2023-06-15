@@ -584,6 +584,7 @@ input[type="text"]:focus, input[type="email"]:focus,input[type="password"]:focus
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    text-align: center;
     flex-direction: column;
     width: 40rem;
     height: 40rem;
