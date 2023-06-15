@@ -57,9 +57,14 @@ nav a, #joinUs a, #edit, #save{
     
 }
 
-a:hover, #joinUs a:hover, #edit:hover, #save:hover{
+a:not(.slider):hover, #joinUs a:hover, #edit:hover, #save:hover{
     color: #f8f8f8;
     transform: scale(1.1);
+}
+
+.slider .info {
+    color: #252525;
+    text-decoration: none;
 }
 
 .item{

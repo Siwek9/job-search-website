@@ -26,7 +26,7 @@ window.onmousemove = e => {
         transform: `translate(${nextPercentage}%, 20%)`
     }, {duration: 1200, fill:"forwards"});
 
-    for(const image of track.getElementsByClassName("image")){ //na querySlector nie działa
+    for(const image of track.getElementsByClassName("image")){ //na querySelector nie działa
         // image.style.objectPosition = (nextPercentage + 100) + "50%";
         image.animate({
             objectPosition: `${nextPercentage + 100}% center`
@@ -35,9 +35,9 @@ window.onmousemove = e => {
     }
 }
 
-cards.forEach(element=>{
-    element.addEventListener("click", function(){
-        let link = "mainpage.html?firm=" + element.id;
-        window.open(link, "_self").focus();
-    })
-});
+// cards.forEach(element=>{
+//     element.addEventListener("click", function(){
+//         let link = "company-offers-show.php?companyID=" + element.id;
+//         window.open(link, "_self").focus();
+//     });
+// });

@@ -47,7 +47,7 @@
         <div id="wrapper">
             <!-- Dosłownie ma się wyświetlać tak samo jak oferty na stronie firmy. Dodaj tylko na dole przycisk aplikuj (button#save) nazwa id niezgodna ale działa XD. Jeśli zgłoszenie zostało wysłane po prostu przeładuj stronę i zmień button na zwykły <div style="font: 600 30px Poppins">Zgłoszenie zostało wysłane</div> -->
             <?php 
-                $result = $connect->query("SELECT * FROM job_offers WHERE company_id = {$_GET['id']}");
+                $result = $connect->query("SELECT * FROM job_offers WHERE company_id = {$_GET['companyID']}");
                 if ($result) {
                     require('server/show.php');
                     while($row = $result->fetch_assoc()) {
