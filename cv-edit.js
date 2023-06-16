@@ -187,7 +187,6 @@ $(document).ready(function() {
             processData: false,
             success: function(r) {
                 var result;
-                console.log(r);
                 try {
                     var result = JSON.parse(r);
                 }

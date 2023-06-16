@@ -55,6 +55,10 @@
     <div id="workApplications">
         <h1>Zgłoszenia o pracę</h1>
         <div id="flex2">
+            <?php
+                $result = $connect->query("SELECT * FROM job_application WHERE job_application.job_offer_id IN (SELECT id FROM job_offers WHERE company_id = {$_SESSION['userID']})")
+                
+            ?>
         <div class="appCard"> <!-- Cały ten div w php wyświetl, z danymi oczywiście -->
             <div class="infoC">
                 <div>
@@ -67,7 +71,7 @@
                 </div>
             </div>
             <div class="rightB">
-                <button>Zobacz CV</button>
+                <a href="seeCV.php?offerID={$row['id'}">Zobacz CV</a>
             </div>
         </div>
 

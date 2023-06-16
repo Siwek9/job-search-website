@@ -1,7 +1,49 @@
 <?php
+function companyDataShow($companyData) {
+    $toReturn = "
+    <div id='loginPass'>
+        <div id='firmData'>
+            <img src='assets/images/company-logo/56.png' alt=''>
+            <b>Właściciel: </b> <span>Gienek Bocian</span>
+            <b>Nazwa firmy: </b> <span>Bocian i Spółka</span>
+            <b>Adres E-Mail: </b> <span>bocian@aa.com</span>
+            <b>Adres: </b> <span>Zadupie ul.Gdzieś w lesie</span>
+            <b>Opis: </b> <span>Specjalizujemy się w: tak naprawdę to nie wiadomo co robimy</span> 
+            <div style='display:flex; flex-direction: row-reverse'>
+                <a href='edit-data.php' id='edit' style='width: 8rem; margin-right: 1rem'>Edytuj dane</a>
+            </div>
+        </div>
+    </div>";
+
+    return $toReturn;
+}
+
 function offerShow($offerData, $companyPhoto) {
     // session_start();
     $accountType = $_SESSION['accountType'];
+
+    require_once('database-functions.php');
+    $connect = database_connect_to_mysql();
+    if(!$connect) {
+        die;
+    }
+
+    $offer_answer = "";
+    if ($accountType == "employee") {
+        $result = $connect->query("SELECT status FROM job_application WHERE job_offer_id = {$offerData['id']} AND job_candidate_id = {$_SESSION['userID']}");
+        if ($result) {
+            if ($result->num_rows > 0) {
+                $application_status = $result->fetch_assoc()['status'];
+
+                if ($application_status == "sended") {
+                    $offer_answer = "Zgłoszenie zostało wysłane do pracodawcy.";
+                }
+                else if ($application_status == "approved") {
+                    $offer_answer = "Zgłoszenie zostało zatwierdzone przez pracodawce. Czekaj na kontakt drogą mailową lub telefoniczną";
+                }
+            }
+        }
+    }
 
     $toReturn = "
     <div class='cv' style='width: 50rem;'>
@@ -64,7 +106,7 @@ function offerShow($offerData, $companyPhoto) {
         $toReturn .= "<a href='offer-edit.php?offerID={$offerData['id']}' id='edit'>Edytuj dane</a>";
     }
     else if ($accountType == "employee") {
-        $toReturn .= "<a href='offer-edit.html' id='edit'>Wyślij zgłoszenie</a>";
+        $toReturn .= "<div id='offer-answer' style='font-weight: bold; color: green;'>$offer_answer</div><a href='server/send-application.php?offerID={$offerData['id']}' id='edit'>Wyślij zgłoszenie</a>";
     }
     $toReturn .= "
         </div>

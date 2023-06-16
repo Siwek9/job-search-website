@@ -4,21 +4,23 @@
 
 Projekt JobSE to aplikacja dla prawconików jak i pracodawców. Zadaniem JobSE jest ułatwienie szukania pracy oraz znajdowania pracowników. Tworzenie ofert pracy oraz z cv prosto z okna przeglądarki.
 Demo przedstawia wersję testwową aplikacji.
-Wersja testowa posiada: 
+Wersja testowa posiada:
 
 1. Rejestrację i aktywację konta (poprzez wysyłanie maila),
 2. Logowanie i zapamiętywania użytkownika,
-3. Dla pracowników: dodawanie CV, przegląanie i aplikowanie ofert,
-4. Dla pracodawców: doawanie ofert, przegląanie CV osób ubiegających się o pracę,
+3. Dla pracowników: dodawanie CV, przeglądanie i aplikowanie ofert,
+4. Dla pracodawców: dodawanie ofert osób ubiegających się o pracę,
 
 Projekt został napisany przy użyciu HTML5, CSS3 i jQuery (JS) (front-end) oraz PHP i MySql (back-end).
 
 ### Ciekawostka
-Dodaliśmy także zdarzenie w SQL, które powowduje usunięcie nie aktywowanych kont.
-<br><br>
+
+Dodaliśmy także zdarzenie w SQL, które powoduje usunięcie nie aktywowanych kont.
 ![Zdarzenie SQL](image.png)
 
-Z powodu małej ilości czasu na wykonanie projektu mogą występować miejscami błędy lub niedopatrzenia. Serdecznie za nie przepraszamy.
+oraz triggera, który wykonuje się, w momencie usunięcia użytkownika i ma sprzątać. ![Trigger SQL](image-2.png)
+
+Z powodu małej ilości czasu na wykonanie projektu mogą występować na stronie niedziałające funkcje, błędy lub niedopatrzenia. Serdecznie za nie przepraszamy.
 
 ### Wykorzystane biblioteki:
 

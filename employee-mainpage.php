@@ -15,7 +15,7 @@
 
     $connect = database_connect_to_mysql();
 
-    $result = $connect->query("SELECT * FROM user_employees WHERE user_employees.id = (SELECT accounts.id_user_data FROM accounts WHERE accounts.id = {$_SESSION['userID']});");
+    $result = $connect->query("SELECT * FROM user_employees WHERE user_employees.id = (SELECT accounts.id_user_data FROM accounts WHERE accounts.id = {$_SESSION['userID']})");
 
     $userData = $result->fetch_assoc();
 ?>
@@ -81,7 +81,7 @@
                             echo "Nieznane" . "<br>";
                         }
                         if (!is_null($row['offers_number'])){
-                            echo $row['offers_number'] . "stanowisk<br>";
+                            echo $row['offers_number'] . " stanowisk<br>";
                         }
                         else {
                             echo "0 stanowisk" . "<br>";
@@ -98,7 +98,20 @@
     <div class="flex">
     <div id="myOffers">
         <h1>Moje oferty pracy</h1>
-        tu będą sie wyswietlać wszytkie firmy do których wysłaliśmy wiadomość o zainteresowaniu i czy nam odpowiedziały czy nie
+        <?php
+            $result = $connect->query("SELECT job_offers.* FROM job_offers JOIN job_application ON job_offers.id = job_application.job_offer_id WHERE job_application.job_candidate_id = {$_SESSION['userID']}");
+            if ($result) {
+                while($row = $result->fetch_assoc()) {
+                    // print_r($row);
+                    $resultPhoto = $connect->query("SELECT user_employers.company_logo FROM user_employers WHERE user_employers.id = (SELECT accounts.id_user_data FROM accounts WHERE accounts.id = {$row['company_id']})");
+                    $photoName = $resultPhoto->fetch_assoc()['company_logo'];
+                    // print_r($photoName);
+                    require_once('server/show.php');
+                    echo offerShow($row, $photoName);
+                }
+            }
+        ?>
+        <!-- tu będą sie wyswietlać wszytkie firmy do których wysłaliśmy wiadomość o zainteresowaniu i czy nam odpowiedziały czy nie -->
     </div>
     <div id="myData">
         <h1>Moje dane</h1>
@@ -108,7 +121,7 @@
         </div>
         <h2>Moje CV</h2>
         <?php 
-            require("server/show.php");
+            require_once("server/show.php");
             if (!is_null($userData['first_name'])) {
                 echo cvShow($userData);
             }
